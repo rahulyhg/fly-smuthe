@@ -10,6 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBAction func understandButtonClicked(sender: UIButton) {
+        self.performSegueWithIdentifier("understandSegue", sender: self);
+        return;
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
