@@ -64,7 +64,7 @@ class PageViewController : UIViewController, UIPageViewControllerDataSource {
     
     func viewControllerAtIndex(index: Int) -> PagedViewControllerBase! {
         currentIdx = index;
-        let pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("FineSmoothAirViewController") as! PagedViewControllerBase;
+        let pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("FindSmoothAirViewController") as! PagedViewControllerBase;
         pageViewController.pageIndex = index;
         //pageViewController.delegate = self;
         switch(index){

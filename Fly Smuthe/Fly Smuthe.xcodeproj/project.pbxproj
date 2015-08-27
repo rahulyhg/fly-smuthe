@@ -15,6 +15,7 @@
 		EA4D365E1B8E65450060091C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA4D365C1B8E65450060091C /* LaunchScreen.xib */; };
 		EA4D366A1B8E65450060091C /* Fly_SmutheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4D36691B8E65450060091C /* Fly_SmutheTests.swift */; };
 		EA667B841B8F4251001430B6 /* FindSmoothAirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667B831B8F4251001430B6 /* FindSmoothAirViewController.swift */; };
+		EA667B881B8FAB92001430B6 /* DataCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667B871B8FAB92001430B6 /* DataCollectionManager.swift */; };
 		EABCDE351B8E7C6C002572F4 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCDE341B8E7C6C002572F4 /* PageViewController.swift */; };
 		EABCDE371B8E8215002572F4 /* PagedViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		EA4D36681B8E65450060091C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA4D36691B8E65450060091C /* Fly_SmutheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fly_SmutheTests.swift; sourceTree = "<group>"; };
 		EA667B831B8F4251001430B6 /* FindSmoothAirViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindSmoothAirViewController.swift; sourceTree = "<group>"; };
+		EA667B871B8FAB92001430B6 /* DataCollectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCollectionManager.swift; sourceTree = "<group>"; };
 		EABCDE341B8E7C6C002572F4 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedViewControllerBase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,16 +87,11 @@
 		EA4D364D1B8E65450060091C /* Fly Smuthe */ = {
 			isa = PBXGroup;
 			children = (
-				EA4D36501B8E65450060091C /* AppDelegate.swift */,
-				EA4D36551B8E65450060091C /* ViewController.swift */,
-				EA4D36571B8E65450060091C /* Main.storyboard */,
+				EA667B861B8FAB6B001430B6 /* UI */,
+				EA667B851B8FAB67001430B6 /* Managers */,
 				EA4D365A1B8E65450060091C /* Images.xcassets */,
-				EA4D365C1B8E65450060091C /* LaunchScreen.xib */,
 				EA4D36521B8E65450060091C /* Fly_Smuthe.xcdatamodeld */,
 				EA4D364E1B8E65450060091C /* Supporting Files */,
-				EABCDE341B8E7C6C002572F4 /* PageViewController.swift */,
-				EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */,
-				EA667B831B8F4251001430B6 /* FindSmoothAirViewController.swift */,
 			);
 			path = "Fly Smuthe";
 			sourceTree = "<group>";
@@ -122,6 +119,28 @@
 				EA4D36681B8E65450060091C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA667B851B8FAB67001430B6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				EA667B871B8FAB92001430B6 /* DataCollectionManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		EA667B861B8FAB6B001430B6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EABCDE341B8E7C6C002572F4 /* PageViewController.swift */,
+				EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */,
+				EA667B831B8F4251001430B6 /* FindSmoothAirViewController.swift */,
+				EA4D365C1B8E65450060091C /* LaunchScreen.xib */,
+				EA4D36501B8E65450060091C /* AppDelegate.swift */,
+				EA4D36551B8E65450060091C /* ViewController.swift */,
+				EA4D36571B8E65450060091C /* Main.storyboard */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +252,7 @@
 				EA4D36561B8E65450060091C /* ViewController.swift in Sources */,
 				EA4D36511B8E65450060091C /* AppDelegate.swift in Sources */,
 				EA667B841B8F4251001430B6 /* FindSmoothAirViewController.swift in Sources */,
+				EA667B881B8FAB92001430B6 /* DataCollectionManager.swift in Sources */,
 				EA4D36541B8E65450060091C /* Fly_Smuthe.xcdatamodeld in Sources */,
 				EABCDE371B8E8215002572F4 /* PagedViewControllerBase.swift in Sources */,
 				EABCDE351B8E7C6C002572F4 /* PageViewController.swift in Sources */,
