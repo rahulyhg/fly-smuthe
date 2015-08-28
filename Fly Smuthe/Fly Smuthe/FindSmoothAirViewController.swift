@@ -8,8 +8,18 @@
 
 import Foundation
 import UIKit
+import CoreLocation
+import CoreMotion
 
 class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManagerDelegate {
+    
+    @IBOutlet weak var gpsLabel: UILabel!
+    
+    @IBOutlet weak var xLabel: UILabel!
+    
+    @IBOutlet weak var yLabel: UILabel!
+    
+    @IBOutlet weak var zLabel: UILabel!
     
     override func viewDidLoad() {
         DataCollectionManager.sharedInstance.startCollection(self);
@@ -17,5 +27,16 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
     
     func requestAccess(controller: UIAlertController) {
         self.presentViewController(controller, animated: true, completion: nil);
+    }
+    
+    func receivedUpdate(locations: [AnyObject]!, accelerometerData: CMAccelerometerData!){
+        if let location = (locations.last as? CLLocation) {
+            gpsLabel.text = String(format:"%f", location.coordinate.latitude) + " " + String(format:"%f", location.coordinate.longitude);
+        }
+        if let thisAccelerometerData = accelerometerData {
+            xLabel.text = String(format:"%.1f", thisAccelerometerData.acceleration.x);
+            yLabel.text = String(format:"%.1f", thisAccelerometerData.acceleration.y);
+            zLabel.text = String(format:"%.1f", thisAccelerometerData.acceleration.z);
+        }
     }
 }

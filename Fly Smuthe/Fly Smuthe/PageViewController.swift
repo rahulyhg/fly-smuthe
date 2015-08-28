@@ -64,13 +64,20 @@ class PageViewController : UIViewController, UIPageViewControllerDataSource {
     
     func viewControllerAtIndex(index: Int) -> PagedViewControllerBase! {
         currentIdx = index;
-        let pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("FindSmoothAirViewController") as! PagedViewControllerBase;
-        pageViewController.pageIndex = index;
+        var pageViewController: PagedViewControllerBase!;
         //pageViewController.delegate = self;
         switch(index){
+        case findSmoothAirIdx:
+            pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("FindSmoothAirViewController") as! PagedViewControllerBase;
+            break;
+        case reportAirConditionIdx:
+            pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ReportConditionsViewController") as! PagedViewControllerBase;
+            break;
             default:
+                pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("FindSmoothAirViewController") as! PagedViewControllerBase;
                 break;
         }
+        pageViewController.pageIndex = index;
         return pageViewController;
     }
     

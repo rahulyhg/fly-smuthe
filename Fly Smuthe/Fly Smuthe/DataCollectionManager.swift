@@ -75,9 +75,14 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         let theseLocations = locations;
         let currentAccelValues = motionManager.accelerometerData;
+        if let strongDelegate = self.delegate{
+            strongDelegate.receivedUpdate(locations, accelerometerData: currentAccelValues);
+        }
     }
 }
 
 protocol DataCollectionManagerDelegate {
     func requestAccess(controller: UIAlertController);
+    
+    func receivedUpdate(locations: [AnyObject]!, accelerometerData: CMAccelerometerData!);
 }
