@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TurbulenceStatisticReposi
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         TurbulenceStatisticRepository.sharedInstance.setContextAndSaveDelegate(managedObjectContext!, saveDelegate: self);
+        TurbulenceStatisticRepository.sharedInstance.startBackgroundSync();
         
         return true
     }

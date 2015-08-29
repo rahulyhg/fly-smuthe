@@ -62,7 +62,19 @@ class TurbulenceStatisticModel {
             return true;
         }
         
-        if(abs(Altitude - turbulenceDataState.Altitude) > 100){
+        if(Altitude != nil && turbulenceDataState.Altitude != nil && abs(Altitude - turbulenceDataState.Altitude) > 100){
+            return true;
+        }
+        
+        if(XAccel != nil && turbulenceDataState.XAccel != nil && fabs(XAccel - turbulenceDataState.XAccel) > 0.5){
+            return true;
+        }
+        
+        if(YAccel != nil && turbulenceDataState.YAccel != nil && fabs(YAccel - turbulenceDataState.YAccel) > 0.5){
+            return true;
+        }
+        
+        if(ZAccel != nil && turbulenceDataState.ZAccel != nil && fabs(ZAccel - turbulenceDataState.ZAccel) > 0.5){
             return true;
         }
         

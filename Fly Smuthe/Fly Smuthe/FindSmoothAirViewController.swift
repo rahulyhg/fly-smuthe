@@ -29,8 +29,8 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
         self.presentViewController(controller, animated: true, completion: nil);
     }
     
-    func receivedUpdate(locations: [AnyObject]!, accelerometerData: CMAccelerometerData!){
-        if let location = (locations.last as? CLLocation) {
+    func receivedUpdate(lastLocation: CLLocation!, accelerometerData: CMAccelerometerData!){
+        if let location = lastLocation {
             gpsLabel.text = String(format:"%f", location.coordinate.latitude) + " " + String(format:"%f", location.coordinate.longitude);
         }
         if let thisAccelerometerData = accelerometerData {

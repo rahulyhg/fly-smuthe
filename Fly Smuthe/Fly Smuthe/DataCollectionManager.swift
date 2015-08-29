@@ -76,12 +76,15 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         let theseLocations = locations;
-        let currentAccelValues = motionManager.accelerometerData;
         
+        var xAccel: Double!;
+        var yAccel: Double!;
+        var zAccel: Double!;
         var altitude: Int!;
         var latitude: Double!;
         var longitude: Double!;
         var weakLocation: CLLocation!;
+        var weakAccelData: CMAccelerometerData!;
         
         if let location = (locations.last as? CLLocation) {
             altitude = Int(location.altitude);
@@ -90,11 +93,19 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
             weakLocation = location;
         }
         
-        if let strongDelegate = self.delegate{
-            strongDelegate.receivedUpdate(weakLocation, accelerometerData: currentAccelValues);
+        
+        if let currentAccelValues = motionManager.accelerometerData{
+            weakAccelData = currentAccelValues;
+            xAccel = currentAccelValues.acceleration.x;
+            yAccel = currentAccelValues.acceleration.y;
+            zAccel = currentAccelValues.acceleration.z;
         }
         
-        var newTurbulenceDataState = TurbulenceStatisticModel(xAccel: currentAccelValues.acceleration.x, yAccel: currentAccelValues.acceleration.y, zAccel: currentAccelValues.acceleration.z, altitude: altitude, latitude: latitude, longitude: longitude);
+        if let strongDelegate = self.delegate{
+            strongDelegate.receivedUpdate(weakLocation, accelerometerData: weakAccelData);
+        }
+        
+        var newTurbulenceDataState = TurbulenceStatisticModel(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude);
         if(latestTurbulenceDataState == nil || latestTurbulenceDataState.hasNotableChange(newTurbulenceDataState)){
             latestTurbulenceDataState = newTurbulenceDataState;
             
