@@ -16,6 +16,8 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager();
     let motionManager = CMMotionManager();
     
+    var latestTurbulenceDataState: TurbulenceStatisticModel!;
+    
     var delegate: DataCollectionManagerDelegate!;
     
     class var sharedInstance: DataCollectionManager {
@@ -75,8 +77,37 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         let theseLocations = locations;
         let currentAccelValues = motionManager.accelerometerData;
+        
+        var altitude: Int!;
+        var latitude: Double!;
+        var longitude: Double!;
+        var weakLocation: CLLocation!;
+        
+        if let location = (locations.last as? CLLocation) {
+            altitude = Int(location.altitude);
+            latitude = location.coordinate.latitude;
+            longitude = location.coordinate.longitude;
+            weakLocation = location;
+        }
+        
         if let strongDelegate = self.delegate{
-            strongDelegate.receivedUpdate(locations, accelerometerData: currentAccelValues);
+            strongDelegate.receivedUpdate(weakLocation, accelerometerData: currentAccelValues);
+        }
+        
+        var newTurbulenceDataState = TurbulenceStatisticModel(xAccel: currentAccelValues.acceleration.x, yAccel: currentAccelValues.acceleration.y, zAccel: currentAccelValues.acceleration.z, altitude: altitude, latitude: latitude, longitude: longitude);
+        if(latestTurbulenceDataState == nil || latestTurbulenceDataState.hasNotableChange(newTurbulenceDataState)){
+            latestTurbulenceDataState = newTurbulenceDataState;
+            
+            syncOrSave(latestTurbulenceDataState);
+        }
+    }
+    
+    private func syncOrSave(turbulenceStatistic: TurbulenceStatisticModel){
+        // Connected to internet?
+        if(IJReachability.isConnectedToNetwork()){
+            
+        } else {
+            TurbulenceStatisticRepository.sharedInstance.save(turbulenceStatistic);
         }
     }
 }
@@ -84,5 +115,5 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
 protocol DataCollectionManagerDelegate {
     func requestAccess(controller: UIAlertController);
     
-    func receivedUpdate(locations: [AnyObject]!, accelerometerData: CMAccelerometerData!);
+    func receivedUpdate(lastLocation: CLLocation!, accelerometerData: CMAccelerometerData!);
 }
