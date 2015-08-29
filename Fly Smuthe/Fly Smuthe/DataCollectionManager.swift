@@ -98,16 +98,7 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
         if(latestTurbulenceDataState == nil || latestTurbulenceDataState.hasNotableChange(newTurbulenceDataState)){
             latestTurbulenceDataState = newTurbulenceDataState;
             
-            syncOrSave(latestTurbulenceDataState);
-        }
-    }
-    
-    private func syncOrSave(turbulenceStatistic: TurbulenceStatisticModel){
-        // Connected to internet?
-        if(IJReachability.isConnectedToNetwork()){
-            
-        } else {
-            TurbulenceStatisticRepository.sharedInstance.save(turbulenceStatistic);
+            TurbulenceStatisticRepository.sharedInstance.save(latestTurbulenceDataState);
         }
     }
 }
