@@ -23,6 +23,10 @@
 		EA667B9A1B9240BA001430B6 /* IJReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667B991B9240BA001430B6 /* IJReachability.swift */; };
 		EA667B9C1B924AB4001430B6 /* ThreadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667B9B1B924AB4001430B6 /* ThreadUtility.swift */; };
 		EA667B9E1B924AD5001430B6 /* CancelableBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667B9D1B924AD5001430B6 /* CancelableBlock.swift */; };
+		EA667BA01B93D9FA001430B6 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667B9F1B93D9FA001430B6 /* Serializable.swift */; };
+		EA667BA31B93DA3A001430B6 /* TurbulenceStatisticDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667BA21B93DA3A001430B6 /* TurbulenceStatisticDTO.swift */; };
+		EA667BA61B93DB5E001430B6 /* APIWebProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667BA51B93DB5E001430B6 /* APIWebProxy.swift */; };
+		EA667BA91B93DCF6001430B6 /* APIURLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667BA81B93DCF6001430B6 /* APIURLConstants.swift */; };
 		EABCDE351B8E7C6C002572F4 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCDE341B8E7C6C002572F4 /* PageViewController.swift */; };
 		EABCDE371B8E8215002572F4 /* PagedViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +62,10 @@
 		EA667B991B9240BA001430B6 /* IJReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IJReachability.swift; sourceTree = "<group>"; };
 		EA667B9B1B924AB4001430B6 /* ThreadUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadUtility.swift; sourceTree = "<group>"; };
 		EA667B9D1B924AD5001430B6 /* CancelableBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelableBlock.swift; sourceTree = "<group>"; };
+		EA667B9F1B93D9FA001430B6 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
+		EA667BA21B93DA3A001430B6 /* TurbulenceStatisticDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurbulenceStatisticDTO.swift; sourceTree = "<group>"; };
+		EA667BA51B93DB5E001430B6 /* APIWebProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIWebProxy.swift; sourceTree = "<group>"; };
+		EA667BA81B93DCF6001430B6 /* APIURLConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIURLConstants.swift; sourceTree = "<group>"; };
 		EABCDE341B8E7C6C002572F4 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedViewControllerBase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +109,9 @@
 		EA4D364D1B8E65450060091C /* Fly Smuthe */ = {
 			isa = PBXGroup;
 			children = (
+				EA667BA71B93DCEA001430B6 /* Constants */,
+				EA667BA41B93DB2B001430B6 /* Messages */,
+				EA667BA11B93DA2D001430B6 /* DTOs */,
 				EA667B941B922563001430B6 /* Utilities */,
 				EA667B911B92251F001430B6 /* Models */,
 				EA667B8E1B92247E001430B6 /* Repositories */,
@@ -184,8 +195,33 @@
 				EA667B991B9240BA001430B6 /* IJReachability.swift */,
 				EA667B9B1B924AB4001430B6 /* ThreadUtility.swift */,
 				EA667B9D1B924AD5001430B6 /* CancelableBlock.swift */,
+				EA667B9F1B93D9FA001430B6 /* Serializable.swift */,
+				EA667BA51B93DB5E001430B6 /* APIWebProxy.swift */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		EA667BA11B93DA2D001430B6 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				EA667BA21B93DA3A001430B6 /* TurbulenceStatisticDTO.swift */,
+			);
+			name = DTOs;
+			sourceTree = "<group>";
+		};
+		EA667BA41B93DB2B001430B6 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
+		EA667BA71B93DCEA001430B6 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				EA667BA81B93DCF6001430B6 /* APIURLConstants.swift */,
+			);
+			name = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,14 +336,18 @@
 				EA667B9A1B9240BA001430B6 /* IJReachability.swift in Sources */,
 				EA667B841B8F4251001430B6 /* FindSmoothAirViewController.swift in Sources */,
 				EA667B901B92248F001430B6 /* TurbulenceStatisticRepository.swift in Sources */,
+				EA667BA01B93D9FA001430B6 /* Serializable.swift in Sources */,
 				EA667B881B8FAB92001430B6 /* DataCollectionManager.swift in Sources */,
 				EA667B8A1B8FC25F001430B6 /* ReportConditionsViewController.swift in Sources */,
+				EA667BA61B93DB5E001430B6 /* APIWebProxy.swift in Sources */,
 				EA667B9C1B924AB4001430B6 /* ThreadUtility.swift in Sources */,
 				EA667B9E1B924AD5001430B6 /* CancelableBlock.swift in Sources */,
 				EA4D36541B8E65450060091C /* Fly_Smuthe.xcdatamodeld in Sources */,
 				EABCDE371B8E8215002572F4 /* PagedViewControllerBase.swift in Sources */,
 				EA667B961B922577001430B6 /* DateUtility.swift in Sources */,
 				EABCDE351B8E7C6C002572F4 /* PageViewController.swift in Sources */,
+				EA667BA91B93DCF6001430B6 /* APIURLConstants.swift in Sources */,
+				EA667BA31B93DA3A001430B6 /* TurbulenceStatisticDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

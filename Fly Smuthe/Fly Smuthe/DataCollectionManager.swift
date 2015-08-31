@@ -86,11 +86,15 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
         var weakLocation: CLLocation!;
         var weakAccelData: CMAccelerometerData!;
         
+        var hasLocationData = false;
+        var hasAccelData = false;
+        
         if let location = (locations.last as? CLLocation) {
             altitude = Int(location.altitude);
             latitude = location.coordinate.latitude;
             longitude = location.coordinate.longitude;
             weakLocation = location;
+            hasLocationData = true;
         }
         
         
@@ -99,6 +103,7 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
             xAccel = currentAccelValues.acceleration.x;
             yAccel = currentAccelValues.acceleration.y;
             zAccel = currentAccelValues.acceleration.z;
+            hasAccelData = true;
         }
         
         if let strongDelegate = self.delegate{
@@ -106,7 +111,7 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
         }
         
         var newTurbulenceDataState = TurbulenceStatisticModel(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude);
-        if(latestTurbulenceDataState == nil || latestTurbulenceDataState.hasNotableChange(newTurbulenceDataState)){
+        if((latestTurbulenceDataState == nil && hasLocationData && hasAccelData) || (latestTurbulenceDataState != nil && latestTurbulenceDataState.hasNotableChange(newTurbulenceDataState))){
             latestTurbulenceDataState = newTurbulenceDataState;
             
             TurbulenceStatisticRepository.sharedInstance.save(latestTurbulenceDataState);

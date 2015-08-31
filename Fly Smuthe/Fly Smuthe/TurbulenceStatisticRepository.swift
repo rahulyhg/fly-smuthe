@@ -36,6 +36,8 @@ class TurbulenceStatisticRepository {
     var context: NSManagedObjectContext!;
 
     var saveDelegate: TurbulenceStatisticRepositorySaveDelegate!;
+    
+    let apiWebProxy: APIWebProxy = APIWebProxy();
  
     func setContextAndSaveDelegate(context: NSManagedObjectContext, saveDelegate: TurbulenceStatisticRepositorySaveDelegate){
         self.context = context;
@@ -69,7 +71,32 @@ class TurbulenceStatisticRepository {
                     if(resultList.count > 0) {
                         for result in resultList {
                             
-                            self.context.deleteObject(result as! NSManagedObject);
+                            if let obj = result as? NSManagedObject {
+                                let xAccel = obj.valueForKey(TurbulenceStatisticProperties.XAccelKey)!.doubleValue!;
+                                let yAccel = obj.valueForKey(TurbulenceStatisticProperties.YAccelKey)!.doubleValue!;
+                                let zAccel = obj.valueForKey(TurbulenceStatisticProperties.ZAccelKey)!.doubleValue!;
+                                let altitude = obj.valueForKey(TurbulenceStatisticProperties.AltitudeKey)!.integerValue!;
+                                let latitude = obj.valueForKey(TurbulenceStatisticProperties.LatitudeKey)!.doubleValue!;
+                                let longitude = obj.valueForKey(TurbulenceStatisticProperties.LongitudeKey)!.doubleValue!;
+                                let date = obj.valueForKey(TurbulenceStatisticProperties.CreatedKey) as! NSDate;
+                                
+                                var turbulenceStatisticDTO = TurbulenceStatisticDTO(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude, created: date);
+                                
+                                self.apiWebProxy.post(turbulenceStatisticDTO, credential: "", url: APIURLConstants.PostTurbulenceStatistic, expectsEncryptedResponse: false, postCompleted: { (succeeded: Bool, msg: String, json: NSDictionary?) -> () in
+                                    
+                                    var parsed = false;
+                                    if(succeeded) {
+                                        if let parseJSON = json {
+                                            /*
+                                            if let responseCode = parseJSON["ResponseCode"]?.integerValue {
+                                            
+                                            }
+                                            */
+                                        }
+                                    }
+                                });
+                                self.context.deleteObject(obj);
+                            }
                         }
                     }
                 }
