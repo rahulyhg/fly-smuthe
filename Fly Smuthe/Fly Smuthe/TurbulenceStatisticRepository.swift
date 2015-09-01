@@ -22,6 +22,8 @@ struct TurbulenceStatisticProperties {
 
 class TurbulenceStatisticRepository {
     
+    let MaxHoursBeforeDataStale = 4.0;
+    
     init(){
         
     }
@@ -60,13 +62,14 @@ class TurbulenceStatisticRepository {
     }
     
     func startBackgroundSync(){
+        // Prevents two threads from hitting this at the same time
         if(!isSyncing){
+            // Set isSyncing to true while background thread works
             isSyncing = true;
             
             ThreadUtility.runOnBackgroundPriorityBackgroundThread(){
                 if(IJReachability.isConnectedToNetwork()){
                     // Sync unsynced data to API
-                    
                     let request = NSFetchRequest(entityName: TurbulenceStatisticProperties.EntityName);
                     var error: NSError? = nil;
                     
@@ -79,13 +82,18 @@ class TurbulenceStatisticRepository {
                                 if let obj = result as? NSManagedObject {
                                     let date = obj.valueForKey(TurbulenceStatisticProperties.CreatedKey) as? NSDate;
                                     
+                                    // Get the date and make sure it saved properly
+                                    // Note: this probably isn't necessary, but I saw a nil exception
+                                    // during debugging that indicated the date was not properly saved
                                     if(date != nil){
                                         let hoursStale = NSDate().timeIntervalSinceDate(date!).hours;
-                                        if(hoursStale > 3){
+                                        // If the data is more than MaxHoursBeforeDataStale, we don't want it anymore
+                                        if(hoursStale > self.MaxHoursBeforeDataStale){
                                             self.context.deleteObject(obj);
                                             continue;
                                         }
                                         
+                                        // Get all the values we need to sync
                                         let xAccel = obj.valueForKey(TurbulenceStatisticProperties.XAccelKey)!.doubleValue!;
                                         let yAccel = obj.valueForKey(TurbulenceStatisticProperties.YAccelKey)!.doubleValue!;
                                         let zAccel = obj.valueForKey(TurbulenceStatisticProperties.ZAccelKey)!.doubleValue!;
@@ -93,14 +101,19 @@ class TurbulenceStatisticRepository {
                                         let latitude = obj.valueForKey(TurbulenceStatisticProperties.LatitudeKey)!.doubleValue!;
                                         let longitude = obj.valueForKey(TurbulenceStatisticProperties.LongitudeKey)!.doubleValue!;
                                         
+                                        // Assemble DTO for syncing
                                         var turbulenceStatisticDTO = TurbulenceStatisticDTO(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude, created: date!);
                                         
+                                        // Post to web api
                                         self.apiWebProxy.post(turbulenceStatisticDTO, credential: "", url: APIURLConstants.PostTurbulenceStatistic, expectsEncryptedResponse: false, postCompleted: { (succeeded: Bool, msg: String, json: NSDictionary?) -> () in
                                             
+                                            // If unsuccessful, the data will remain local and keep trying
+                                            // to sync until it is stale
                                             var parsed = false;
                                             if(succeeded) {
                                                 if let parseJSON = json {
                                                     if let responseCode = parseJSON["ResponseCode"]?.integerValue {
+                                                        // If successful, delete the local row
                                                         if(responseCode == ResponseCodes.Success){
                                                             self.context.deleteObject(obj);
                                                         }
@@ -110,6 +123,7 @@ class TurbulenceStatisticRepository {
                                             }
                                         });
                                     } else {
+                                        // There was an error reading the date, delete the data
                                         self.context.deleteObject(obj);
                                     }
                                     
@@ -117,9 +131,10 @@ class TurbulenceStatisticRepository {
                             }
                         }
                     }
-                    
+                    // Finally save all the changes we made (deletions) to the local data store
                     self.saveDelegate.saveContext();
                 }
+                // Reset isSyncing flag to allow another round of calls
                 ThreadUtility.runOnMainThread(){
                     self.isSyncing = false;
                 }
