@@ -29,31 +29,31 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7Y-n3-4t1">
-                                        <rect key="frame" x="496" y="14" width="90" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7Y-n3-4t1">
+                                        <rect key="frame" x="544" y="14" width="42" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="90" id="J0O-bf-CJW"/>
+                                            <constraint firstAttribute="width" constant="42" id="NcK-XQ-Uli"/>
                                             <constraint firstAttribute="height" constant="21" id="Pja-d4-PKG"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exI-Wb-6Sy">
-                                        <rect key="frame" x="550" y="14" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GkP-bD-bXK">
+                                        <rect key="frame" x="494" y="14" width="42" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="42" id="JfZ-a8-A4F"/>
-                                            <constraint firstAttribute="height" constant="21" id="zYy-aM-2Bp"/>
+                                            <constraint firstAttribute="width" constant="42" id="wgU-Bi-vHK"/>
+                                            <constraint firstAttribute="height" constant="21" id="z7O-JI-X72"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GkP-bD-bXK">
-                                        <rect key="frame" x="440" y="14" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exI-Wb-6Sy">
+                                        <rect key="frame" x="444" y="14" width="42" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="42" id="wgU-Bi-vHK"/>
-                                            <constraint firstAttribute="height" constant="21" id="z7O-JI-X72"/>
+                                            <constraint firstAttribute="width" constant="42" id="JfZ-a8-A4F"/>
+                                            <constraint firstAttribute="height" constant="21" id="zYy-aM-2Bp"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -63,9 +63,9 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="GkP-bD-bXK" secondAttribute="bottom" constant="15" id="73h-O2-bqv"/>
-                                    <constraint firstItem="P7Y-n3-4t1" firstAttribute="leading" secondItem="GkP-bD-bXK" secondAttribute="trailing" constant="14" id="BNY-xR-nlb"/>
+                                    <constraint firstItem="P7Y-n3-4t1" firstAttribute="leading" secondItem="GkP-bD-bXK" secondAttribute="trailing" constant="8" id="BNY-xR-nlb"/>
                                     <constraint firstAttribute="trailing" secondItem="P7Y-n3-4t1" secondAttribute="trailing" constant="14" id="D5U-59-V85"/>
-                                    <constraint firstAttribute="trailing" secondItem="exI-Wb-6Sy" secondAttribute="trailing" constant="8" id="Gfz-z4-IzS"/>
+                                    <constraint firstAttribute="trailing" secondItem="exI-Wb-6Sy" secondAttribute="trailing" constant="114" id="Gfz-z4-IzS"/>
                                     <constraint firstItem="4q1-2X-U6e" firstAttribute="leading" secondItem="Qv3-qv-ze2" secondAttribute="leading" constant="8" id="IcM-IT-34c"/>
                                     <constraint firstAttribute="bottom" secondItem="P7Y-n3-4t1" secondAttribute="bottom" constant="15" id="TzB-Ad-6Eh"/>
                                     <constraint firstAttribute="bottom" secondItem="4q1-2X-U6e" secondAttribute="bottom" constant="15" id="Zs8-1h-FL3"/>
@@ -136,13 +136,13 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="258" id="4m2-KV-WNA"/>
                                 </constraints>
-                                <mutableString key="text">Fly Smuthe should NOT be used as a replacement for proper weather and meteorlogical condition research prior to or during flight.
+                                <string key="text">Fly Smuthe should NOT be used as a replacement for proper weather and meteorlogical condition research prior to or during flight.
 
 1. Do NOT change altitudes unless you fully understand the implications
 2. Do NOT use Fly Smuthe as a weather advisory tool 3. Do NOT deviate from any regulations
 4. Do NOT rely on Fly Smuthe information to make decisions prior to or during flight
 
-Fly Smuthe uses crowd sourced data to show air smoothness at various altitudes. The data may be unreliable and as such should not be used to make decisions prior to or during flight. </mutableString>
+Fly Smuthe uses crowd sourced data to show air smoothness at various altitudes. The data may be unreliable and as such should not be used to make decisions prior to or during flight. </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

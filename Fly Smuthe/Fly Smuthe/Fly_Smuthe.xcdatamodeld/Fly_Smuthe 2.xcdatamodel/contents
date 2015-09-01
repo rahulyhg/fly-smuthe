@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="TurbulenceStatistic" syncable="YES">
+        <attribute name="altitude" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="x_accel" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="y_accel" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="z_accel" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="TurbulenceStatistic" positionX="-63" positionY="-18" width="128" height="150"/>
+    </elements>
+</model>
