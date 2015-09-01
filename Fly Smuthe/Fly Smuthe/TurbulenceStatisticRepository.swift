@@ -72,13 +72,20 @@ class TurbulenceStatisticRepository {
                         for result in resultList {
                             
                             if let obj = result as? NSManagedObject {
+                                let date = obj.valueForKey(TurbulenceStatisticProperties.CreatedKey) as! NSDate;
+                                
+                                let hoursStale = NSDate().timeIntervalSinceDate(date).hours;
+                                if(hoursStale > 3){
+                                    self.saveDelegate.saveContext();
+                                    return;
+                                }
+                                
                                 let xAccel = obj.valueForKey(TurbulenceStatisticProperties.XAccelKey)!.doubleValue!;
                                 let yAccel = obj.valueForKey(TurbulenceStatisticProperties.YAccelKey)!.doubleValue!;
                                 let zAccel = obj.valueForKey(TurbulenceStatisticProperties.ZAccelKey)!.doubleValue!;
                                 let altitude = obj.valueForKey(TurbulenceStatisticProperties.AltitudeKey)!.integerValue!;
                                 let latitude = obj.valueForKey(TurbulenceStatisticProperties.LatitudeKey)!.doubleValue!;
                                 let longitude = obj.valueForKey(TurbulenceStatisticProperties.LongitudeKey)!.doubleValue!;
-                                let date = obj.valueForKey(TurbulenceStatisticProperties.CreatedKey) as! NSDate;
                                 
                                 var turbulenceStatisticDTO = TurbulenceStatisticDTO(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude, created: date);
                                 
@@ -87,21 +94,19 @@ class TurbulenceStatisticRepository {
                                     var parsed = false;
                                     if(succeeded) {
                                         if let parseJSON = json {
-                                            /*
                                             if let responseCode = parseJSON["ResponseCode"]?.integerValue {
-                                            
+                                                if(responseCode == ResponseCodes.Success){
+                                                    self.context.deleteObject(obj);
+                                                }
                                             }
-                                            */
+                                            
                                         }
                                     }
                                 });
-                                self.context.deleteObject(obj);
                             }
                         }
                     }
                 }
-                
-                self.saveDelegate.saveContext();
             }
             
             // Recursive call to startBackgroundSync every 20 seconds

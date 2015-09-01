@@ -9,6 +9,6 @@
 import Foundation
 
 struct APIURLConstants {
-    static let PostTurbulenceStatistic: String = "http://flysmuthe.com/api/turbulencestatistic";
-    static let GetTurbulenceStatistic: String = "http://flysmuth.com/api/turbulencestatistic/[latitude]/[longitude]";
+    static let PostTurbulenceStatistic: String = "https://flysmuthe.com/api/turbulencestatistic";
+    static let GetTurbulenceStatistic: String = "https://flysmuth.com/api/turbulencestatistic/[latitude]/[longitude]";
 }

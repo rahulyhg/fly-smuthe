@@ -27,6 +27,7 @@
 		EA667BA31B93DA3A001430B6 /* TurbulenceStatisticDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667BA21B93DA3A001430B6 /* TurbulenceStatisticDTO.swift */; };
 		EA667BA61B93DB5E001430B6 /* APIWebProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667BA51B93DB5E001430B6 /* APIWebProxy.swift */; };
 		EA667BA91B93DCF6001430B6 /* APIURLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667BA81B93DCF6001430B6 /* APIURLConstants.swift */; };
+		EA748B3A1B95242C00503A73 /* ResponseCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA748B391B95242C00503A73 /* ResponseCodes.swift */; };
 		EABCDE351B8E7C6C002572F4 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCDE341B8E7C6C002572F4 /* PageViewController.swift */; };
 		EABCDE371B8E8215002572F4 /* PagedViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,7 @@
 		EA667BA21B93DA3A001430B6 /* TurbulenceStatisticDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurbulenceStatisticDTO.swift; sourceTree = "<group>"; };
 		EA667BA51B93DB5E001430B6 /* APIWebProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIWebProxy.swift; sourceTree = "<group>"; };
 		EA667BA81B93DCF6001430B6 /* APIURLConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIURLConstants.swift; sourceTree = "<group>"; };
+		EA748B391B95242C00503A73 /* ResponseCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseCodes.swift; sourceTree = "<group>"; };
 		EABCDE341B8E7C6C002572F4 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedViewControllerBase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				EA667BA81B93DCF6001430B6 /* APIURLConstants.swift */,
+				EA748B391B95242C00503A73 /* ResponseCodes.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			files = (
 				EA4D36561B8E65450060091C /* ViewController.swift in Sources */,
 				EA667B981B9226D8001430B6 /* TurbulenceStatisticModel.swift in Sources */,
+				EA748B3A1B95242C00503A73 /* ResponseCodes.swift in Sources */,
 				EA4D36511B8E65450060091C /* AppDelegate.swift in Sources */,
 				EA667B9A1B9240BA001430B6 /* IJReachability.swift in Sources */,
 				EA667B841B8F4251001430B6 /* FindSmoothAirViewController.swift in Sources */,
