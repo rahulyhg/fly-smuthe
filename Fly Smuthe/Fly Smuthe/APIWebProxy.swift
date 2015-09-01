@@ -22,9 +22,16 @@ class APIWebProxy {
             jsonString = param!.toJsonString()!;
         }
         
+        var thisCredential: String;
+        if(count(credential) == 0){
+            thisCredential = SecurityConstants.APIId + ":" + SecurityConstants.APISecret;
+        } else {
+            thisCredential = credential;
+        }
+        
         request.HTTPBody = jsonString.dataUsingEncoding(NSUTF8StringEncoding)!;
         request.addValue(String(jsonString.length), forHTTPHeaderField: "Content-Length");
-        request.addValue("Basic " + credential, forHTTPHeaderField: "Authorization");
+        request.addValue("Basic " + thisCredential, forHTTPHeaderField: "Authorization");
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("100-continue", forHTTPHeaderField: "Expect");
         request.addValue("no-cache", forHTTPHeaderField: "Cache-Control");
