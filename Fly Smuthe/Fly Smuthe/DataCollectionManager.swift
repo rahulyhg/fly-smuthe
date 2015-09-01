@@ -116,6 +116,8 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
             
             TurbulenceStatisticRepository.sharedInstance.save(latestTurbulenceDataState);
         }
+        
+        TurbulenceStatisticRepository.sharedInstance.startBackgroundSync();
     }
 }
 

@@ -35,22 +35,11 @@ class TurbulenceStatisticModel {
     var Longitude: Double!;
     
     func hasNotableChange(turbulenceDataState: TurbulenceStatisticModel) -> Bool {
-        if(XAccel == nil && turbulenceDataState.XAccel != nil){
-            return true;
+        if(hasNil(turbulenceDataState)){
+            return false;
         }
-        if(YAccel == nil && turbulenceDataState.YAccel != nil){
-            return true;
-        }
-        if(ZAccel == nil && turbulenceDataState.ZAccel != nil){
-            return true;
-        }
-        if(Altitude == nil && turbulenceDataState.Altitude != nil){
-            return true;
-        }
-        if(Latitude == nil && turbulenceDataState.Latitude != nil){
-            return true;
-        }
-        if(Longitude == nil && turbulenceDataState.Longitude != nil){
+        
+        if(hasNil(self)){
             return true;
         }
         
@@ -66,18 +55,28 @@ class TurbulenceStatisticModel {
             return true;
         }
         
-        if(XAccel != nil && turbulenceDataState.XAccel != nil && fabs(XAccel - turbulenceDataState.XAccel) > 0.5){
+        if(XAccel != nil && turbulenceDataState.XAccel != nil && fabs(XAccel - turbulenceDataState.XAccel) > 0.2){
             return true;
         }
         
-        if(YAccel != nil && turbulenceDataState.YAccel != nil && fabs(YAccel - turbulenceDataState.YAccel) > 0.5){
+        if(YAccel != nil && turbulenceDataState.YAccel != nil && fabs(YAccel - turbulenceDataState.YAccel) > 0.2){
             return true;
         }
         
-        if(ZAccel != nil && turbulenceDataState.ZAccel != nil && fabs(ZAccel - turbulenceDataState.ZAccel) > 0.5){
+        if(ZAccel != nil && turbulenceDataState.ZAccel != nil && fabs(ZAccel - turbulenceDataState.ZAccel) > 0.2){
             return true;
         }
         
         return false;
+    }
+    
+    func hasNil(model: TurbulenceStatisticModel) -> Bool {
+        return
+            model.XAccel == nil ||
+            model.YAccel == nil ||
+            model.ZAccel == nil ||
+            model.Altitude == nil ||
+            model.Latitude == nil ||
+            model.Longitude == nil;
     }
 }

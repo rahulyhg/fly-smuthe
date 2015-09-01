@@ -38,6 +38,8 @@ class TurbulenceStatisticRepository {
     var saveDelegate: TurbulenceStatisticRepositorySaveDelegate!;
     
     let apiWebProxy: APIWebProxy = APIWebProxy();
+    
+    var isSyncing = false;
  
     func setContextAndSaveDelegate(context: NSManagedObjectContext, saveDelegate: TurbulenceStatisticRepositorySaveDelegate){
         self.context = context;
@@ -58,61 +60,68 @@ class TurbulenceStatisticRepository {
     }
     
     func startBackgroundSync(){
-        ThreadUtility.runOnBackgroundPriorityBackgroundThread(){
-            if(IJReachability.isConnectedToNetwork()){
-                // Sync unsynced data to API
-
-                let request = NSFetchRequest(entityName: TurbulenceStatisticProperties.EntityName);
-                var error: NSError? = nil;
-                
-                let results = self.context.executeFetchRequest(request, error: &error);
-                
-                if let resultList = results {
-                    if(resultList.count > 0) {
-                        for result in resultList {
-                            
-                            if let obj = result as? NSManagedObject {
-                                let date = obj.valueForKey(TurbulenceStatisticProperties.CreatedKey) as! NSDate;
+        if(!isSyncing){
+            isSyncing = true;
+            
+            ThreadUtility.runOnBackgroundPriorityBackgroundThread(){
+                if(IJReachability.isConnectedToNetwork()){
+                    // Sync unsynced data to API
+                    
+                    let request = NSFetchRequest(entityName: TurbulenceStatisticProperties.EntityName);
+                    var error: NSError? = nil;
+                    
+                    let results = self.context.executeFetchRequest(request, error: &error);
+                    
+                    if let resultList = results {
+                        if(resultList.count > 0) {
+                            for result in resultList {
                                 
-                                let hoursStale = NSDate().timeIntervalSinceDate(date).hours;
-                                if(hoursStale > 3){
-                                    self.saveDelegate.saveContext();
-                                    return;
-                                }
-                                
-                                let xAccel = obj.valueForKey(TurbulenceStatisticProperties.XAccelKey)!.doubleValue!;
-                                let yAccel = obj.valueForKey(TurbulenceStatisticProperties.YAccelKey)!.doubleValue!;
-                                let zAccel = obj.valueForKey(TurbulenceStatisticProperties.ZAccelKey)!.doubleValue!;
-                                let altitude = obj.valueForKey(TurbulenceStatisticProperties.AltitudeKey)!.integerValue!;
-                                let latitude = obj.valueForKey(TurbulenceStatisticProperties.LatitudeKey)!.doubleValue!;
-                                let longitude = obj.valueForKey(TurbulenceStatisticProperties.LongitudeKey)!.doubleValue!;
-                                
-                                var turbulenceStatisticDTO = TurbulenceStatisticDTO(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude, created: date);
-                                
-                                self.apiWebProxy.post(turbulenceStatisticDTO, credential: "", url: APIURLConstants.PostTurbulenceStatistic, expectsEncryptedResponse: false, postCompleted: { (succeeded: Bool, msg: String, json: NSDictionary?) -> () in
+                                if let obj = result as? NSManagedObject {
+                                    let date = obj.valueForKey(TurbulenceStatisticProperties.CreatedKey) as? NSDate;
                                     
-                                    var parsed = false;
-                                    if(succeeded) {
-                                        if let parseJSON = json {
-                                            if let responseCode = parseJSON["ResponseCode"]?.integerValue {
-                                                if(responseCode == ResponseCodes.Success){
-                                                    self.context.deleteObject(obj);
+                                    if(date != nil){
+                                        let hoursStale = NSDate().timeIntervalSinceDate(date!).hours;
+                                        if(hoursStale > 3){
+                                            self.context.deleteObject(obj);
+                                            continue;
+                                        }
+                                        
+                                        let xAccel = obj.valueForKey(TurbulenceStatisticProperties.XAccelKey)!.doubleValue!;
+                                        let yAccel = obj.valueForKey(TurbulenceStatisticProperties.YAccelKey)!.doubleValue!;
+                                        let zAccel = obj.valueForKey(TurbulenceStatisticProperties.ZAccelKey)!.doubleValue!;
+                                        let altitude = obj.valueForKey(TurbulenceStatisticProperties.AltitudeKey)!.integerValue!;
+                                        let latitude = obj.valueForKey(TurbulenceStatisticProperties.LatitudeKey)!.doubleValue!;
+                                        let longitude = obj.valueForKey(TurbulenceStatisticProperties.LongitudeKey)!.doubleValue!;
+                                        
+                                        var turbulenceStatisticDTO = TurbulenceStatisticDTO(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude, created: date!);
+                                        
+                                        self.apiWebProxy.post(turbulenceStatisticDTO, credential: "", url: APIURLConstants.PostTurbulenceStatistic, expectsEncryptedResponse: false, postCompleted: { (succeeded: Bool, msg: String, json: NSDictionary?) -> () in
+                                            
+                                            var parsed = false;
+                                            if(succeeded) {
+                                                if let parseJSON = json {
+                                                    if let responseCode = parseJSON["ResponseCode"]?.integerValue {
+                                                        if(responseCode == ResponseCodes.Success){
+                                                            self.context.deleteObject(obj);
+                                                        }
+                                                    }
+                                                    
                                                 }
                                             }
-                                            
-                                        }
+                                        });
+                                    } else {
+                                        self.context.deleteObject(obj);
                                     }
-                                });
+                                    
+                                }
                             }
                         }
                     }
+                    
+                    self.saveDelegate.saveContext();
                 }
-            }
-            
-            // Recursive call to startBackgroundSync every 20 seconds
-            ThreadUtility.delay(20){
                 ThreadUtility.runOnMainThread(){
-                    self.startBackgroundSync();
+                    self.isSyncing = false;
                 }
             }
         }
