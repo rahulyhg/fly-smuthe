@@ -17,9 +17,9 @@ class TurbulenceStatisticModel {
         XAccel = xAccel;
         YAccel = yAccel;
         ZAccel = zAccel;
-        Altitude = altitude;
         Latitude = latitude;
         Longitude = longitude;
+        self.setAltitude(altitude);
     }
     
     var XAccel: Double!;
@@ -33,6 +33,12 @@ class TurbulenceStatisticModel {
     var Latitude: Double!;
     
     var Longitude: Double!;
+    
+    private func setAltitude(altitude: Int!){
+        if(altitude != nil){
+            Altitude = Int(round(Double(altitude) / 100.0) * 100);
+        }
+    }
     
     func hasNotableChange(turbulenceDataState: TurbulenceStatisticModel) -> Bool {
         if(hasNil(turbulenceDataState)){
