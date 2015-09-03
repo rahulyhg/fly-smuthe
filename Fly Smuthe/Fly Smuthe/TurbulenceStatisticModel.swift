@@ -61,15 +61,15 @@ class TurbulenceStatisticModel {
             return true;
         }
         
-        if(XAccel != nil && turbulenceDataState.XAccel != nil && fabs(XAccel - turbulenceDataState.XAccel) > 0.2){
+        if(XAccel != nil && turbulenceDataState.XAccel != nil && fabs(XAccel - turbulenceDataState.XAccel) > 0.1){
             return true;
         }
         
-        if(YAccel != nil && turbulenceDataState.YAccel != nil && fabs(YAccel - turbulenceDataState.YAccel) > 0.2){
+        if(YAccel != nil && turbulenceDataState.YAccel != nil && fabs(YAccel - turbulenceDataState.YAccel) > 0.1){
             return true;
         }
         
-        if(ZAccel != nil && turbulenceDataState.ZAccel != nil && fabs(ZAccel - turbulenceDataState.ZAccel) > 0.2){
+        if(ZAccel != nil && turbulenceDataState.ZAccel != nil && fabs(ZAccel - turbulenceDataState.ZAccel) > 0.1){
             return true;
         }
         

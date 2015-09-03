@@ -34,9 +34,9 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
             gpsLabel.text = String(format:"%f", location.coordinate.latitude) + " " + String(format:"%f", location.coordinate.longitude);
         }
         if let thisAccelerometerData = accelerometerData {
-            xLabel.text = String(format:"%.1f", thisAccelerometerData.acceleration.x);
-            yLabel.text = String(format:"%.1f", thisAccelerometerData.acceleration.y);
-            zLabel.text = String(format:"%.1f", thisAccelerometerData.acceleration.z);
+            xLabel.text = String(format:"%.2f", thisAccelerometerData.acceleration.x);
+            yLabel.text = String(format:"%.2f", thisAccelerometerData.acceleration.y);
+            zLabel.text = String(format:"%.2f", thisAccelerometerData.acceleration.z);
         }
     }
 }

@@ -20,7 +20,7 @@ class TurbulenceStatisticDTO : Serializable {
         let dateFormatter = NSDateFormatter();
         let timeZone = NSTimeZone(name: "UTC");
         dateFormatter.timeZone = timeZone;
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss";
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
         self.Created = dateFormatter.stringFromDate(created);
     }
     
