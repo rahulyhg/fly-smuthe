@@ -42,10 +42,13 @@ class TurbulenceStatisticRepository {
     let apiWebProxy: APIWebProxy = APIWebProxy();
     
     var isSyncing = false;
+    
+    var groupId = "";
  
     func setContextAndSaveDelegate(context: NSManagedObjectContext, saveDelegate: TurbulenceStatisticRepositorySaveDelegate){
         self.context = context;
         self.saveDelegate = saveDelegate;
+        groupId = NSUUID().UUIDString;
     }
     
     func save(turbulenceStatistic: TurbulenceStatisticModel) {
@@ -102,7 +105,7 @@ class TurbulenceStatisticRepository {
                                         let longitude = obj.valueForKey(TurbulenceStatisticProperties.LongitudeKey)!.doubleValue!;
                                         
                                         // Assemble DTO for syncing
-                                        var turbulenceStatisticDTO = TurbulenceStatisticDTO(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude, created: date!);
+                                        var turbulenceStatisticDTO = TurbulenceStatisticDTO(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude, created: date!, groupId: self.groupId);
                                         
                                         // Post to web api
                                         self.apiWebProxy.post(turbulenceStatisticDTO, credential: "", url: APIURLConstants.PostTurbulenceStatistic, expectsEncryptedResponse: false, postCompleted: { (succeeded: Bool, msg: String, json: NSDictionary?) -> () in
