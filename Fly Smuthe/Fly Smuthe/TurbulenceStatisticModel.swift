@@ -11,8 +11,6 @@ import CoreLocation
 
 class TurbulenceStatisticModel {
     
-    private let NauticalMilesPerMeter = 0.000539957;
-    
     init(xAccel: Double!, yAccel: Double!, zAccel: Double!, altitude: Int!, latitude: Double!, longitude: Double!){
         XAccel = xAccel;
         YAccel = yAccel;
@@ -53,7 +51,7 @@ class TurbulenceStatisticModel {
         var newLocation = CLLocation(latitude: turbulenceDataState.Latitude, longitude: turbulenceDataState.Longitude);
         var distanceInMeters = newLocation.distanceFromLocation(thisLocation);
         
-        if((distanceInMeters * NauticalMilesPerMeter) > 0.10){
+        if((distanceInMeters * ConfigurationConstants.NauticalMilesPerMeter) > 0.10){
             return true;
         }
         
