@@ -37,15 +37,28 @@
                                     <constraint firstAttribute="height" constant="50" id="gZW-rJ-3Uo"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="emv-jk-1Ok">
+                                <rect key="frame" x="0.0" y="28" width="600" height="522"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y2Z-2s-3cy" id="F1l-Vb-2Xd"/>
+                                    <outlet property="delegate" destination="Y2Z-2s-3cy" id="ScE-Rz-5pU"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="emv-jk-1Ok" secondAttribute="trailing" id="AkT-9G-9Lk"/>
                             <constraint firstAttribute="trailing" secondItem="Qv3-qv-ze2" secondAttribute="trailing" id="ahq-Rb-uYf"/>
+                            <constraint firstItem="emv-jk-1Ok" firstAttribute="top" secondItem="dgS-Db-lk3" secondAttribute="bottom" constant="8" id="g9u-Lf-s7T"/>
+                            <constraint firstItem="emv-jk-1Ok" firstAttribute="leading" secondItem="rsA-6Z-JFN" secondAttribute="leading" id="iPH-iY-eSs"/>
                             <constraint firstItem="PSa-2N-dJX" firstAttribute="top" secondItem="Qv3-qv-ze2" secondAttribute="bottom" id="ibr-W2-XZl"/>
+                            <constraint firstItem="Qv3-qv-ze2" firstAttribute="top" secondItem="emv-jk-1Ok" secondAttribute="bottom" id="lEw-iD-QdJ"/>
                             <constraint firstItem="Qv3-qv-ze2" firstAttribute="leading" secondItem="rsA-6Z-JFN" secondAttribute="leading" id="oix-jC-RUb"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="emv-jk-1Ok" id="xxB-H7-iqg"/>
                         <outlet property="timeLabel" destination="P7Y-n3-4t1" id="PGG-kc-vQi"/>
                     </connections>
                 </viewController>

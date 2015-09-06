@@ -51,23 +51,23 @@ class TurbulenceStatisticModel {
         var newLocation = CLLocation(latitude: turbulenceDataState.Latitude, longitude: turbulenceDataState.Longitude);
         var distanceInMeters = newLocation.distanceFromLocation(thisLocation);
         
-        if((distanceInMeters * ConfigurationConstants.NauticalMilesPerMeter) > 0.10){
+        if((distanceInMeters * ConfigurationConstants.NauticalMilesPerMeter) >= 0.10){
             return true;
         }
         
-        if(Altitude != nil && turbulenceDataState.Altitude != nil && abs(Altitude - turbulenceDataState.Altitude) > 100){
+        if(Altitude != nil && turbulenceDataState.Altitude != nil && abs(Altitude - turbulenceDataState.Altitude) >= 100){
             return true;
         }
         
-        if(XAccel != nil && turbulenceDataState.XAccel != nil && fabs(XAccel - turbulenceDataState.XAccel) > 0.05){
+        if(XAccel != nil && turbulenceDataState.XAccel != nil && fabs(XAccel - turbulenceDataState.XAccel) >= 0.01){
             return true;
         }
         
-        if(YAccel != nil && turbulenceDataState.YAccel != nil && fabs(YAccel - turbulenceDataState.YAccel) > 0.05){
+        if(YAccel != nil && turbulenceDataState.YAccel != nil && fabs(YAccel - turbulenceDataState.YAccel) >= 0.01){
             return true;
         }
         
-        if(ZAccel != nil && turbulenceDataState.ZAccel != nil && fabs(ZAccel - turbulenceDataState.ZAccel) > 0.05){
+        if(ZAccel != nil && turbulenceDataState.ZAccel != nil && fabs(ZAccel - turbulenceDataState.ZAccel) >= 0.01){
             return true;
         }
         

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA3487691B9BC7B8006E1681 /* IntensityRatingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3487681B9BC7B8006E1681 /* IntensityRatingConstants.swift */; };
 		EA4D36511B8E65450060091C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4D36501B8E65450060091C /* AppDelegate.swift */; };
 		EA4D36541B8E65450060091C /* Fly_Smuthe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EA4D36521B8E65450060091C /* Fly_Smuthe.xcdatamodeld */; };
 		EA4D36561B8E65450060091C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4D36551B8E65450060091C /* ViewController.swift */; };
@@ -33,6 +34,9 @@
 		EABCDE371B8E8215002572F4 /* PagedViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */; };
 		EAD8EC661B9A965E00850BE7 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EC651B9A965E00850BE7 /* StringExtension.swift */; };
 		EAD8EC681B9B526900850BE7 /* ConfigurationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EC671B9B526900850BE7 /* ConfigurationConstants.swift */; };
+		EAD8EC6A1B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EC691B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift */; };
+		EAD8EC6C1B9BB98400850BE7 /* TurbulenceLocationSummaryDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EC6B1B9BB98400850BE7 /* TurbulenceLocationSummaryDataCell.swift */; };
+		EAD8EC701B9BB9F700850BE7 /* TurbulenceLocationSummaryDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD8EC6F1B9BB9F700850BE7 /* TurbulenceLocationSummaryDataCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EA3487681B9BC7B8006E1681 /* IntensityRatingConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntensityRatingConstants.swift; sourceTree = "<group>"; };
 		EA4D364B1B8E65450060091C /* Fly Smuthe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fly Smuthe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA4D364F1B8E65450060091C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA4D36501B8E65450060091C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +82,9 @@
 		EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedViewControllerBase.swift; sourceTree = "<group>"; };
 		EAD8EC651B9A965E00850BE7 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		EAD8EC671B9B526900850BE7 /* ConfigurationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationConstants.swift; sourceTree = "<group>"; };
+		EAD8EC691B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurbulenceLocationSummaryDTO.swift; sourceTree = "<group>"; };
+		EAD8EC6B1B9BB98400850BE7 /* TurbulenceLocationSummaryDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurbulenceLocationSummaryDataCell.swift; sourceTree = "<group>"; };
+		EAD8EC6F1B9BB9F700850BE7 /* TurbulenceLocationSummaryDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TurbulenceLocationSummaryDataCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +185,8 @@
 				EA4D36501B8E65450060091C /* AppDelegate.swift */,
 				EA4D36551B8E65450060091C /* ViewController.swift */,
 				EA4D36571B8E65450060091C /* Main.storyboard */,
+				EAD8EC6B1B9BB98400850BE7 /* TurbulenceLocationSummaryDataCell.swift */,
+				EAD8EC6F1B9BB9F700850BE7 /* TurbulenceLocationSummaryDataCell.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -215,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				EA667BA21B93DA3A001430B6 /* TurbulenceStatisticDTO.swift */,
+				EAD8EC691B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift */,
 			);
 			name = DTOs;
 			sourceTree = "<group>";
@@ -233,6 +244,7 @@
 				EA748B391B95242C00503A73 /* ResponseCodes.swift */,
 				EA748B3C1B95406500503A73 /* SecurityConstants.swift */,
 				EAD8EC671B9B526900850BE7 /* ConfigurationConstants.swift */,
+				EA3487681B9BC7B8006E1681 /* IntensityRatingConstants.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -323,6 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAD8EC701B9BB9F700850BE7 /* TurbulenceLocationSummaryDataCell.xib in Resources */,
 				EA4D36591B8E65450060091C /* Main.storyboard in Resources */,
 				EA4D365E1B8E65450060091C /* LaunchScreen.xib in Resources */,
 				EA4D365B1B8E65450060091C /* Images.xcassets in Resources */,
@@ -359,9 +372,12 @@
 				EA667B9C1B924AB4001430B6 /* ThreadUtility.swift in Sources */,
 				EA667B9E1B924AD5001430B6 /* CancelableBlock.swift in Sources */,
 				EA4D36541B8E65450060091C /* Fly_Smuthe.xcdatamodeld in Sources */,
+				EA3487691B9BC7B8006E1681 /* IntensityRatingConstants.swift in Sources */,
 				EABCDE371B8E8215002572F4 /* PagedViewControllerBase.swift in Sources */,
 				EA748B3D1B95406500503A73 /* SecurityConstants.swift in Sources */,
 				EA667B961B922577001430B6 /* DateUtility.swift in Sources */,
+				EAD8EC6A1B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift in Sources */,
+				EAD8EC6C1B9BB98400850BE7 /* TurbulenceLocationSummaryDataCell.swift in Sources */,
 				EABCDE351B8E7C6C002572F4 /* PageViewController.swift in Sources */,
 				EA667BA91B93DCF6001430B6 /* APIURLConstants.swift in Sources */,
 				EA667BA31B93DA3A001430B6 /* TurbulenceStatisticDTO.swift in Sources */,
