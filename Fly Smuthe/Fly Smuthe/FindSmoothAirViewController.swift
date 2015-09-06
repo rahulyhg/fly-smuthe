@@ -52,6 +52,9 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
         let nib = UINib(nibName: "TurbulenceLocationSummaryDataCell", bundle: nil);
         tableView.registerNib(nib, forCellReuseIdentifier: TurbulenceLocationSummaryDataCellCellIdentifier);
         tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        
+        tableView.estimatedRowHeight = 200.0
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     func refresh(sender: AnyObject){
@@ -80,7 +83,9 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
             cell.frequencyLabel.font = UIFont.boldSystemFontOfSize(cell.altitudeLabel.font.pointSize);
         }
         
-        if(obj.IntensityRating == IntensityRatingConstants.Smooth){
+        if(obj.Accuracy < 50){
+            cell.backgroundColor = UIColor(white: 0.667, alpha: 0.3);
+        } else if(obj.IntensityRating == IntensityRatingConstants.Smooth){
             cell.backgroundColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.3);
         } else if(obj.IntensityRating == IntensityRatingConstants.Light){
             cell.backgroundColor = UIColor(red: 0.5, green: 1.0, blue: 0.0, alpha: 0.3);
@@ -149,11 +154,13 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
                                     if let results = parseJSON["Results"] as? NSArray{
                                         for var index = 0; index < results.count; ++index {
                                             if let thisResult = results[index] as? NSDictionary {
-                                                self._turbulenceLocationSummaries.append(TurbulenceLocationSummaryDTO(altitude: thisResult["Altitude"]!.integerValue!, averageIntensity: thisResult["AverageIntensity"]!.doubleValue!, bumps: thisResult["Bumps"]!.integerValue!, bumpsPerMinute: thisResult["BumpsPerMinute"]!.doubleValue!, description: thisResult["Description"]! as! String, minutes: thisResult["Minutes"]!.doubleValue!, intensityRating: thisResult["IntensityRating"]!.integerValue!));
+                                                self._turbulenceLocationSummaries.append(TurbulenceLocationSummaryDTO(altitude: thisResult["Altitude"]!.integerValue!, averageIntensity: thisResult["AverageIntensity"]!.doubleValue!, bumps: thisResult["Bumps"]!.integerValue!, bumpsPerMinute: thisResult["BumpsPerMinute"]!.doubleValue!, description: thisResult["Description"]! as! String, minutes: thisResult["Minutes"]!.doubleValue!, intensityRating: thisResult["IntensityRating"]!.integerValue!, radius: thisResult["Radius"]!.integerValue!, accuracy: thisResult["Accuracy"]!.integerValue!));
                                             }
                                         }
                                         
-                                        self.reloadTableView();
+                                        ThreadUtility.runOnMainThread(){
+                                            self.reloadTableView();
+                                        }
                                     }
                                 }
                             }

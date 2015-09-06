@@ -9,7 +9,7 @@
 import Foundation
 
 class TurbulenceLocationSummaryDTO {
-    init(altitude: Int, averageIntensity: Double, bumps: Int, bumpsPerMinute: Double, description: String, minutes: Double, intensityRating: Int){
+    init(altitude: Int, averageIntensity: Double, bumps: Int, bumpsPerMinute: Double, description: String, minutes: Double, intensityRating: Int, radius: Int, accuracy: Int){
         Altitude = altitude;
         AverageIntensity = averageIntensity;
         Bumps = bumps;
@@ -17,6 +17,8 @@ class TurbulenceLocationSummaryDTO {
         Description = description;
         Minutes = minutes;
         IntensityRating = intensityRating;
+        Radius = radius;
+        Accuracy = accuracy;
     }
     
     var Altitude: Int!;
@@ -32,4 +34,8 @@ class TurbulenceLocationSummaryDTO {
     var IntensityRating: Int!;
     
     var Minutes: Double!;
+    
+    var Radius: Int!;
+    
+    var Accuracy: Int!;
 }
