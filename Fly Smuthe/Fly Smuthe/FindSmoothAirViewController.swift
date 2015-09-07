@@ -13,15 +13,15 @@ import CoreMotion
 
 class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManagerDelegate, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var settingsIcon: UIImageView!
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var timeLabel: UILabel!
     
     let _apiWebProxy = APIWebProxy();
     
-    let _downloadInterval = 5.0;
-    
-    let _downloadDistance = 5.0; // Nautical miles
+    let InaccuracyThreshold = 50;
     
     private var refreshControl: UIRefreshControl;
     
@@ -34,6 +34,16 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
     private let TurbulenceLocationSummaryDataCellCellIdentifier = "TurbulenceLocationSummaryDataCellCellIdentifier";
     
     private var isLoadingData = false;
+    
+    var delegate: QuickSettingsViewControllerDelegate!;
+    
+    var includeInaccurateResults: Bool = true;
+    
+    var radius: Int = 3;
+    
+    var hoursUntilStale: Int = 3;
+    
+    var intervalMin: Int = 5;
     
     required init(coder aDecoder: NSCoder)
     {
@@ -55,6 +65,40 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
         
         tableView.estimatedRowHeight = 200.0
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        var settingsTap = UITapGestureRecognizer(target: self, action: Selector("settingsTapped"))
+        settingsIcon.addGestureRecognizer(settingsTap)
+        settingsIcon.userInteractionEnabled = true
+        
+        
+        var viewTap = UITapGestureRecognizer(target: self, action: Selector("settingsDismissed"))
+        view.addGestureRecognizer(viewTap)
+        view.userInteractionEnabled = true
+        
+        if(delegate != nil){
+            self.includeInaccurateResults = delegate.includeInaccurateResults;
+            self.radius = delegate.radius;
+            self.hoursUntilStale = delegate.hoursUntilStale;
+            self.intervalMin = delegate.intervalMin;
+
+        }
+    }
+    
+    func settingsTapped(){
+        if(delegate != nil){
+            delegate.settingsButtonPressed();
+        }
+    }
+    
+    func settingsDismissed(){
+        if(delegate != nil){
+            delegate.settingsDismissed();
+            self.includeInaccurateResults = delegate.includeInaccurateResults;
+            self.radius = delegate.radius;
+            self.hoursUntilStale = delegate.hoursUntilStale;
+            self.intervalMin = delegate.intervalMin;
+            refresh(self);
+        }
     }
     
     func refresh(sender: AnyObject){
@@ -83,7 +127,7 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
             cell.frequencyLabel.font = UIFont.boldSystemFontOfSize(cell.altitudeLabel.font.pointSize);
         }
         
-        if(obj.Accuracy < 50){
+        if(obj.Accuracy < self.InaccuracyThreshold){
             cell.backgroundColor = UIColor(white: 0.667, alpha: 0.3);
         } else if(obj.IntensityRating == IntensityRatingConstants.Smooth){
             cell.backgroundColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.3);
@@ -133,12 +177,12 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
             
             isLoadingData = true;
             
-            if((NSDate().timeIntervalSinceDate(_lastDownloadedDateTime).minute >= _downloadInterval || _lastLocation == nil || (location.distanceFromLocation(_lastLocation) * ConfigurationConstants.NauticalMilesPerMeter) >= _downloadDistance) || forceLoad){
+            if((NSDate().timeIntervalSinceDate(_lastDownloadedDateTime).minute >= Double(self.intervalMin) || _lastLocation == nil || (location.distanceFromLocation(_lastLocation) * ConfigurationConstants.NauticalMilesPerMeter) >= Double(self.radius)) || forceLoad){
                 
                 let latString = String(format:"%f", location.coordinate.latitude);
                 let lonString = String(format:"%f", location.coordinate.longitude);
                 
-                var urlWithParams = APIURLConstants.GetTurbulenceStatistic.sub("[latitude]", with: latString).sub("[longitude]", with: lonString).sub("[radius]", with: String(format:"%f", self._downloadDistance));
+                var urlWithParams = APIURLConstants.GetTurbulenceStatistic.sub("[latitude]", with: latString).sub("[longitude]", with: lonString).sub("[radius]", with: String(self.radius)).sub("[hoursUntilStale]", with: String(self.hoursUntilStale));
                 
                 _apiWebProxy.get("", url: urlWithParams, getCompleted: { (succeeded, msg, json) -> () in
                     if(succeeded) {
@@ -154,7 +198,9 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
                                     if let results = parseJSON["Results"] as? NSArray{
                                         for var index = 0; index < results.count; ++index {
                                             if let thisResult = results[index] as? NSDictionary {
-                                                self._turbulenceLocationSummaries.append(TurbulenceLocationSummaryDTO(altitude: thisResult["Altitude"]!.integerValue!, averageIntensity: thisResult["AverageIntensity"]!.doubleValue!, bumps: thisResult["Bumps"]!.integerValue!, bumpsPerMinute: thisResult["BumpsPerMinute"]!.doubleValue!, description: thisResult["Description"]! as! String, minutes: thisResult["Minutes"]!.doubleValue!, intensityRating: thisResult["IntensityRating"]!.integerValue!, radius: thisResult["Radius"]!.integerValue!, accuracy: thisResult["Accuracy"]!.integerValue!));
+                                                if((!self.includeInaccurateResults && thisResult["Accuracy"]!.integerValue! >= self.InaccuracyThreshold) || self.includeInaccurateResults){
+                                                    self._turbulenceLocationSummaries.append(TurbulenceLocationSummaryDTO(altitude: thisResult["Altitude"]!.integerValue!, averageIntensity: thisResult["AverageIntensity"]!.doubleValue!, bumps: thisResult["Bumps"]!.integerValue!, bumpsPerMinute: thisResult["BumpsPerMinute"]!.doubleValue!, description: thisResult["Description"]! as! String, minutes: thisResult["Minutes"]!.doubleValue!, intensityRating: thisResult["IntensityRating"]!.integerValue!, radius: thisResult["Radius"]!.integerValue!, accuracy: thisResult["Accuracy"]!.integerValue!));
+                                                }
                                             }
                                         }
                                         

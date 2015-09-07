@@ -9,8 +9,11 @@
 import Foundation
 import UIKit
 
-class PageViewController : UIViewController, UIPageViewControllerDataSource {
+class PageViewController : UIViewController, UIPageViewControllerDataSource, QuickSettingsViewControllerDelegate {
     
+    @IBOutlet weak var quickSettingsContainerView: UIView!
+    
+    @IBOutlet weak var quickSettingsContainerViewBottomConstraint: NSLayoutConstraint!
     
     let findSmoothAirIdx = 0;
     let reportAirConditionIdx = 1;
@@ -18,6 +21,16 @@ class PageViewController : UIViewController, UIPageViewControllerDataSource {
     var currentIdx = 0;
     var totalPages = 2;
     var pageViewController: UIPageViewController!;
+    
+    var includeInaccurateResults: Bool = true;
+    
+    var radius: Int = 3;
+    
+    var hoursUntilStale: Int = 3;
+    
+    var intervalMin: Int = 5;
+    
+    var optionsAreHidden = true;
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -32,9 +45,9 @@ class PageViewController : UIViewController, UIPageViewControllerDataSource {
         let firstPage = self.viewControllerAtIndex(0);
         let pageArr = [firstPage];
         pageViewController.setViewControllers(pageArr, direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil);
-        pageViewController.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height - 30);
+        pageViewController.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
         self.addChildViewController(pageViewController);
-        self.view.addSubview(pageViewController.view);
+        self.view.insertSubview(pageViewController.view, belowSubview: quickSettingsContainerView);
         pageViewController.didMoveToParentViewController(self);
     }
     
@@ -62,6 +75,26 @@ class PageViewController : UIViewController, UIPageViewControllerDataSource {
         return self.viewControllerAtIndex(idx);
     }
     
+    func settingsButtonPressed(){
+        toggleOptionsMenu(false);
+    }
+    
+    func settingsDismissed() {
+        toggleOptionsMenu(true);
+    }
+    
+    func toggleOptionsMenu(hide: Bool){
+        let height = CGRectGetHeight(quickSettingsContainerView.bounds);
+        var constant = quickSettingsContainerViewBottomConstraint.constant;
+        constant = hide ? (constant - height) : (constant + height);
+        view.layoutIfNeeded();
+        
+        UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.95, initialSpringVelocity: 1, options: .AllowUserInteraction | .BeginFromCurrentState, animations: {
+                self.quickSettingsContainerViewBottomConstraint.constant = constant;
+                self.view.layoutIfNeeded();
+            }, completion: nil);
+    }
+    
     func viewControllerAtIndex(index: Int) -> PagedViewControllerBase! {
         currentIdx = index;
         var pageViewController: PagedViewControllerBase!;
@@ -69,6 +102,7 @@ class PageViewController : UIViewController, UIPageViewControllerDataSource {
         switch(index){
         case findSmoothAirIdx:
             pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("FindSmoothAirViewController") as! PagedViewControllerBase;
+            (pageViewController as! FindSmoothAirViewController).delegate = self;
             break;
         case reportAirConditionIdx:
             pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ReportConditionsViewController") as! PagedViewControllerBase;
@@ -87,5 +121,11 @@ class PageViewController : UIViewController, UIPageViewControllerDataSource {
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
         return currentIdx;
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "quickSettingsEmbedSegue"){
+            (segue.destinationViewController as! QuickSettingsViewController).delegate = self;
+        }
     }
 }

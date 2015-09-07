@@ -32,6 +32,8 @@
 		EA748B3D1B95406500503A73 /* SecurityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA748B3C1B95406500503A73 /* SecurityConstants.swift */; };
 		EABCDE351B8E7C6C002572F4 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCDE341B8E7C6C002572F4 /* PageViewController.swift */; };
 		EABCDE371B8E8215002572F4 /* PagedViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */; };
+		EACC30961B9DFCD70095598F /* QuickSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACC30951B9DFCD70095598F /* QuickSettingsViewController.swift */; };
+		EACC30981B9E24FD0095598F /* SettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACC30971B9E24FD0095598F /* SettingsConstants.swift */; };
 		EAD8EC661B9A965E00850BE7 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EC651B9A965E00850BE7 /* StringExtension.swift */; };
 		EAD8EC681B9B526900850BE7 /* ConfigurationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EC671B9B526900850BE7 /* ConfigurationConstants.swift */; };
 		EAD8EC6A1B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EC691B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift */; };
@@ -80,6 +82,8 @@
 		EA748B3C1B95406500503A73 /* SecurityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityConstants.swift; sourceTree = "<group>"; };
 		EABCDE341B8E7C6C002572F4 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedViewControllerBase.swift; sourceTree = "<group>"; };
+		EACC30951B9DFCD70095598F /* QuickSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSettingsViewController.swift; sourceTree = "<group>"; };
+		EACC30971B9E24FD0095598F /* SettingsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsConstants.swift; sourceTree = "<group>"; };
 		EAD8EC651B9A965E00850BE7 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		EAD8EC671B9B526900850BE7 /* ConfigurationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationConstants.swift; sourceTree = "<group>"; };
 		EAD8EC691B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurbulenceLocationSummaryDTO.swift; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 				EA4D36571B8E65450060091C /* Main.storyboard */,
 				EAD8EC6B1B9BB98400850BE7 /* TurbulenceLocationSummaryDataCell.swift */,
 				EAD8EC6F1B9BB9F700850BE7 /* TurbulenceLocationSummaryDataCell.xib */,
+				EACC30951B9DFCD70095598F /* QuickSettingsViewController.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				EA748B3C1B95406500503A73 /* SecurityConstants.swift */,
 				EAD8EC671B9B526900850BE7 /* ConfigurationConstants.swift */,
 				EA3487681B9BC7B8006E1681 /* IntensityRatingConstants.swift */,
+				EACC30971B9E24FD0095598F /* SettingsConstants.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -360,6 +366,7 @@
 				EA667B981B9226D8001430B6 /* TurbulenceStatisticModel.swift in Sources */,
 				EA748B3A1B95242C00503A73 /* ResponseCodes.swift in Sources */,
 				EA4D36511B8E65450060091C /* AppDelegate.swift in Sources */,
+				EACC30981B9E24FD0095598F /* SettingsConstants.swift in Sources */,
 				EA667B9A1B9240BA001430B6 /* IJReachability.swift in Sources */,
 				EA667B841B8F4251001430B6 /* FindSmoothAirViewController.swift in Sources */,
 				EA667B901B92248F001430B6 /* TurbulenceStatisticRepository.swift in Sources */,
@@ -375,6 +382,7 @@
 				EA3487691B9BC7B8006E1681 /* IntensityRatingConstants.swift in Sources */,
 				EABCDE371B8E8215002572F4 /* PagedViewControllerBase.swift in Sources */,
 				EA748B3D1B95406500503A73 /* SecurityConstants.swift in Sources */,
+				EACC30961B9DFCD70095598F /* QuickSettingsViewController.swift in Sources */,
 				EA667B961B922577001430B6 /* DateUtility.swift in Sources */,
 				EAD8EC6A1B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift in Sources */,
 				EAD8EC6C1B9BB98400850BE7 /* TurbulenceLocationSummaryDataCell.swift in Sources */,
