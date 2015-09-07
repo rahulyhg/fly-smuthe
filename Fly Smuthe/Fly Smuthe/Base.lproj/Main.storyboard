@@ -16,11 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.49999999999999961" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qv3-qv-ze2">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qv3-qv-ze2">
                                 <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7Y-n3-4t1">
-                                        <rect key="frame" x="8" y="14" width="584" height="21"/>
+                                        <rect key="frame" x="8" y="14" width="534" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Pja-d4-PKG"/>
                                         </constraints>
@@ -28,14 +28,31 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ios-settings-action-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Fah-OS-q5Z">
+                                        <rect key="frame" x="567" y="12" width="25" height="25"/>
+                                        <color key="tintColor" red="0.023529414089999999" green="0.0039215688589999999" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="6Qu-2m-9if"/>
+                                            <constraint firstAttribute="height" constant="25" id="mIR-5l-Zgx"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Fah-OS-q5Z" secondAttribute="bottom" constant="13" id="3Bz-Ce-GcM"/>
                                     <constraint firstAttribute="trailing" secondItem="P7Y-n3-4t1" secondAttribute="trailing" constant="8" id="H6h-e3-wPJ"/>
                                     <constraint firstItem="P7Y-n3-4t1" firstAttribute="leading" secondItem="Qv3-qv-ze2" secondAttribute="leading" constant="8" id="SYM-Ux-FsI"/>
                                     <constraint firstAttribute="bottom" secondItem="P7Y-n3-4t1" secondAttribute="bottom" constant="15" id="TzB-Ad-6Eh"/>
+                                    <constraint firstItem="Fah-OS-q5Z" firstAttribute="leading" secondItem="P7Y-n3-4t1" secondAttribute="trailing" constant="25" id="XkK-2U-asD"/>
                                     <constraint firstAttribute="height" constant="50" id="gZW-rJ-3Uo"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fah-OS-q5Z" secondAttribute="trailing" constant="8" id="rEe-cn-HdD"/>
+                                    <constraint firstItem="Fah-OS-q5Z" firstAttribute="top" secondItem="Qv3-qv-ze2" secondAttribute="top" constant="12" id="uv6-ap-Lgt"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="H6h-e3-wPJ"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="emv-jk-1Ok">
                                 <rect key="frame" x="0.0" y="28" width="600" height="522"/>
@@ -105,7 +122,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7l-gp-4wy">
-                                <rect key="frame" x="20" y="57" width="560" height="258"/>
+                                <rect key="frame" x="20" y="107" width="560" height="258"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="258" id="4m2-KV-WNA"/>
@@ -121,7 +138,7 @@ Fly Smuthe uses crowd sourced data to show air smoothness at various altitudes. 
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WARNING!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vb6-MB-Oa0">
-                                <rect key="frame" x="233" y="28" width="134" height="21"/>
+                                <rect key="frame" x="233" y="78" width="134" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="134" id="LY4-Wk-Mqk"/>
                                     <constraint firstAttribute="height" constant="21" id="unN-5w-HbG"/>
@@ -131,7 +148,7 @@ Fly Smuthe uses crowd sourced data to show air smoothness at various altitudes. 
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wad-qe-ceU">
-                                <rect key="frame" x="256" y="362" width="89" height="30"/>
+                                <rect key="frame" x="256" y="412" width="89" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="89" id="B1H-P7-kip"/>
                                     <constraint firstAttribute="height" constant="30" id="w0d-95-9pd"/>
@@ -150,7 +167,7 @@ Fly Smuthe uses crowd sourced data to show air smoothness at various altitudes. 
                             <constraint firstAttribute="centerX" secondItem="Wad-qe-ceU" secondAttribute="centerX" id="FR6-IP-WzQ"/>
                             <constraint firstAttribute="trailing" secondItem="j7l-gp-4wy" secondAttribute="trailing" constant="20" id="HzT-xd-SD5"/>
                             <constraint firstAttribute="centerX" secondItem="vb6-MB-Oa0" secondAttribute="centerX" id="IvW-FJ-IPg"/>
-                            <constraint firstItem="vb6-MB-Oa0" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="PVk-5g-5VF"/>
+                            <constraint firstItem="vb6-MB-Oa0" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="58" id="PVk-5g-5VF"/>
                             <constraint firstItem="Wad-qe-ceU" firstAttribute="top" secondItem="j7l-gp-4wy" secondAttribute="bottom" constant="47" id="WlH-43-RBg"/>
                             <constraint firstItem="j7l-gp-4wy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="i2I-tQ-i1f"/>
                         </constraints>
@@ -182,4 +199,7 @@ Fly Smuthe uses crowd sourced data to show air smoothness at various altitudes. 
             <point key="canvasLocation" x="1015" y="337"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ios-settings-action-icon" width="22" height="22"/>
+    </resources>
 </document>
