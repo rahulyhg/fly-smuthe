@@ -73,15 +73,7 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
         
         var viewTap = UITapGestureRecognizer(target: self, action: Selector("settingsDismissed"))
         view.addGestureRecognizer(viewTap)
-        view.userInteractionEnabled = true
-        
-        if(delegate != nil){
-            self.includeInaccurateResults = delegate.includeInaccurateResults;
-            self.radius = delegate.radius;
-            self.hoursUntilStale = delegate.hoursUntilStale;
-            self.intervalMin = delegate.intervalMin;
-
-        }
+        view.userInteractionEnabled = true;
     }
     
     func settingsTapped(){
@@ -93,10 +85,6 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
     func settingsDismissed(){
         if(delegate != nil){
             delegate.settingsDismissed();
-            self.includeInaccurateResults = delegate.includeInaccurateResults;
-            self.radius = delegate.radius;
-            self.hoursUntilStale = delegate.hoursUntilStale;
-            self.intervalMin = delegate.intervalMin;
             refresh(self);
         }
     }
@@ -172,7 +160,19 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
         }
     }
     
+    private func getLatestSettings(){
+        if(delegate != nil){
+            self.includeInaccurateResults = delegate.includeInaccurateResults;
+            self.radius = delegate.radius;
+            self.hoursUntilStale = delegate.hoursUntilStale;
+            self.intervalMin = delegate.intervalMin;
+        }
+    }
+    
     private func getTurbulenceData(location: CLLocation, forceLoad: Bool){
+        
+        getLatestSettings();
+        
         if(IJReachability.isConnectedToNetwork() && !isLoadingData){
             
             isLoadingData = true;
