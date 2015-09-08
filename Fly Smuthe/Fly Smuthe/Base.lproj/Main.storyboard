@@ -413,7 +413,7 @@ Fly Smuthe uses crowd sourced data to show air smoothness at various altitudes. 
                                             </connections>
                                         </segmentedControl>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lookback (hrs)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyc-id-Hj7">
-                                            <rect key="frame" x="201" y="99" width="96" height="17"/>
+                                            <rect key="frame" x="201" y="99" width="95.5" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="1" green="0.9960784912109375" blue="0.9960784912109375" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>

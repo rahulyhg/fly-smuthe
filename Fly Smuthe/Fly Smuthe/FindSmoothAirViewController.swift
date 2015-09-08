@@ -147,7 +147,7 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
                 timeLabel.text = "Waiting for data...";
             } else {
                 let timeSinceLastUpdate = NSDate().timeIntervalSinceDate(_lastDownloadedDateTime);
-                timeLabel.text = String(format:"%.2f", location.distanceFromLocation(_lastLocation) * ConfigurationConstants.NauticalMilesPerMeter) + "nm and " + timeSinceLastUpdate.timerString + " since last update";
+                timeLabel.text = "Updated " + String(format:"%.2f", location.distanceFromLocation(_lastLocation) * ConfigurationConstants.NauticalMilesPerMeter) + "nm and " + timeSinceLastUpdate.timerString + " ago";
             }
         }
         

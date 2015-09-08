@@ -19,7 +19,7 @@ class PageViewController : UIViewController, UIPageViewControllerDataSource, Qui
     let reportAirConditionIdx = 1;
     
     var currentIdx = 0;
-    var totalPages = 2;
+    var totalPages = 1;
     var pageViewController: UIPageViewController!;
     
     var includeInaccurateResults: Bool = true;
