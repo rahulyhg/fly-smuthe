@@ -10,4 +10,8 @@ import Foundation
 struct SecurityConstants {
     static let APIId: String = "WV0RwKDcrW4xsMpHQHTN1StCj98SAsoZKH0TJBPMweO8jHwGBHdH45CgoIux2t6";
     static let APISecret: String = "45RqlWLMta8Rbx5OgYdiWuuETNwPC87oMDpwy9hgN5sEY39rLSUnsHmzny7pFr5";
+    
+    static let AccessIdApplicationTag: String = "com.sovereignshare.FlySmuthe.AccessId";
+    
+    static let AccessKeyApplicationTag: String = "com.sovereignshare.FlySmuthe.AccessKey";
 }

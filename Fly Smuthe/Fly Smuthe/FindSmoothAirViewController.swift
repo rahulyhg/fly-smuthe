@@ -184,7 +184,7 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
                 
                 var urlWithParams = APIURLConstants.GetTurbulenceStatistic.sub("[latitude]", with: latString).sub("[longitude]", with: lonString).sub("[radius]", with: String(self.radius)).sub("[hoursUntilStale]", with: String(self.hoursUntilStale));
                 
-                _apiWebProxy.get("", url: urlWithParams, getCompleted: { (succeeded, msg, json) -> () in
+                _apiWebProxy.get(DeviceConfigurationManager.sharedInstance.getAPICredential(), url: urlWithParams, getCompleted: { (succeeded, msg, json) -> () in
                     if(succeeded) {
                         if let parseJSON = json {
                             if let responseCode = parseJSON["ResponseCode"]?.integerValue {

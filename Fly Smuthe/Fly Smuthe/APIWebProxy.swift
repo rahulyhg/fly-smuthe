@@ -24,7 +24,10 @@ class APIWebProxy {
             thisCredential = credential;
         }
         
-        request.addValue("Basic " + thisCredential, forHTTPHeaderField: "Authorization");
+        var thisCredentialData = ([UInt8](thisCredential.utf8));
+        var thisCredentialBase64 = NSData(bytes: thisCredentialData, length: count(thisCredentialData)).base64EncodedStringWithOptions(nil);
+        
+        request.addValue("Basic " + thisCredentialBase64, forHTTPHeaderField: "Authorization");
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("100-continue", forHTTPHeaderField: "Expect");
         request.addValue("no-cache", forHTTPHeaderField: "Cache-Control");
@@ -73,9 +76,12 @@ class APIWebProxy {
             thisCredential = credential;
         }
         
+        var thisCredentialData = ([UInt8](thisCredential.utf8));
+        var thisCredentialBase64 = NSData(bytes: thisCredentialData, length: count(thisCredentialData)).base64EncodedStringWithOptions(nil);
+        
         request.HTTPBody = jsonString.dataUsingEncoding(NSUTF8StringEncoding)!;
         request.addValue(String(jsonString.length), forHTTPHeaderField: "Content-Length");
-        request.addValue("Basic " + thisCredential, forHTTPHeaderField: "Authorization");
+        request.addValue("Basic " + thisCredentialBase64, forHTTPHeaderField: "Authorization");
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("100-continue", forHTTPHeaderField: "Expect");
         request.addValue("no-cache", forHTTPHeaderField: "Cache-Control");

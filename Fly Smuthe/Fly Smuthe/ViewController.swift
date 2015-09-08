@@ -11,7 +11,11 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBAction func understandButtonClicked(sender: UIButton) {
-        self.performSegueWithIdentifier("understandSegue", sender: self);
+        if(DeviceConfigurationManager.sharedInstance.hasAccessId() && DeviceConfigurationManager.sharedInstance.hasAccessKey()){
+            self.performSegueWithIdentifier("understandSegue", sender: self);
+        } else {
+            self.performSegueWithIdentifier("registrationSegue", sender: self);
+        }
         return;
     }
     

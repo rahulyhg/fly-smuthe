@@ -32,9 +32,9 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Fly Smuthe uses your location to submit anonymous turbulence data. Think anonymous, automatic &quot;PIREP&quot;.</string>
+	<string>Fly Smuthe uses your location to submit turbulence data. Think automatic &quot;PIREP&quot;.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Fly Smuthe uses your location to submit anonymous turbulence data. Think anonymous, automatic &quot;PIREP&quot;.</string>
+	<string>Fly Smuthe uses your location to submit turbulence data. Think automatic &quot;PIREP&quot;.</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
