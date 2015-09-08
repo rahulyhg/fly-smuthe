@@ -13,7 +13,6 @@
 		EA4D36561B8E65450060091C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4D36551B8E65450060091C /* ViewController.swift */; };
 		EA4D36591B8E65450060091C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA4D36571B8E65450060091C /* Main.storyboard */; };
 		EA4D365B1B8E65450060091C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4D365A1B8E65450060091C /* Images.xcassets */; };
-		EA4D365E1B8E65450060091C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA4D365C1B8E65450060091C /* LaunchScreen.xib */; };
 		EA4D366A1B8E65450060091C /* Fly_SmutheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4D36691B8E65450060091C /* Fly_SmutheTests.swift */; };
 		EA667B841B8F4251001430B6 /* FindSmoothAirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667B831B8F4251001430B6 /* FindSmoothAirViewController.swift */; };
 		EA667B881B8FAB92001430B6 /* DataCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA667B871B8FAB92001430B6 /* DataCollectionManager.swift */; };
@@ -60,7 +59,6 @@
 		EA4D36551B8E65450060091C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EA4D36581B8E65450060091C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EA4D365A1B8E65450060091C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		EA4D365D1B8E65450060091C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EA4D36631B8E65450060091C /* Fly SmutheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fly SmutheTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA4D36681B8E65450060091C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA4D36691B8E65450060091C /* Fly_SmutheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fly_SmutheTests.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 				EABCDE361B8E8215002572F4 /* PagedViewControllerBase.swift */,
 				EA667B831B8F4251001430B6 /* FindSmoothAirViewController.swift */,
 				EA667B891B8FC25F001430B6 /* ReportConditionsViewController.swift */,
-				EA4D365C1B8E65450060091C /* LaunchScreen.xib */,
 				EA4D36501B8E65450060091C /* AppDelegate.swift */,
 				EA4D36551B8E65450060091C /* ViewController.swift */,
 				EA4D36571B8E65450060091C /* Main.storyboard */,
@@ -343,7 +340,6 @@
 			files = (
 				EAD8EC701B9BB9F700850BE7 /* TurbulenceLocationSummaryDataCell.xib in Resources */,
 				EA4D36591B8E65450060091C /* Main.storyboard in Resources */,
-				EA4D365E1B8E65450060091C /* LaunchScreen.xib in Resources */,
 				EA4D365B1B8E65450060091C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,14 +413,6 @@
 				EA4D36581B8E65450060091C /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		EA4D365C1B8E65450060091C /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EA4D365D1B8E65450060091C /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

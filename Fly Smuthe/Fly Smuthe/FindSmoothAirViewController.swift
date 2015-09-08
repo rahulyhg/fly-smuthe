@@ -223,10 +223,5 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
     
     private func reloadTableView(){
         self.tableView.reloadData();
-        /*
-        self.tableView.beginUpdates();
-        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-        self.tableView.endUpdates();
-        */
     }
 }
