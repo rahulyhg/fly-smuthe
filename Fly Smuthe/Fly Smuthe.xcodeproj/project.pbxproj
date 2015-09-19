@@ -37,6 +37,9 @@
 		EACC309C1B9E7A220095598F /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACC309B1B9E7A220095598F /* UserDTO.swift */; };
 		EACC309E1B9E7A940095598F /* DeviceConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACC309D1B9E7A940095598F /* DeviceConfigurationManager.swift */; };
 		EACC30A21B9E7AF10095598F /* UYLPasswordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EACC30A11B9E7AF10095598F /* UYLPasswordManager.m */; };
+		EACC30A51B9E96D10095598F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACC30A41B9E96D10095598F /* LaunchScreen.xib */; };
+		EACCDA4A1BADC38E0023DF82 /* IntensityColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACCDA491BADC38E0023DF82 /* IntensityColorConstants.swift */; };
+		EACCDA4C1BADC8AE0023DF82 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACCDA4B1BADC8AE0023DF82 /* SyncManager.swift */; };
 		EAD8EC661B9A965E00850BE7 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EC651B9A965E00850BE7 /* StringExtension.swift */; };
 		EAD8EC681B9B526900850BE7 /* ConfigurationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EC671B9B526900850BE7 /* ConfigurationConstants.swift */; };
 		EAD8EC6A1B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8EC691B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift */; };
@@ -92,6 +95,9 @@
 		EACC309F1B9E7AF00095598F /* Fly Smuthe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fly Smuthe-Bridging-Header.h"; sourceTree = "<group>"; };
 		EACC30A01B9E7AF10095598F /* UYLPasswordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UYLPasswordManager.h; sourceTree = "<group>"; };
 		EACC30A11B9E7AF10095598F /* UYLPasswordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UYLPasswordManager.m; sourceTree = "<group>"; };
+		EACC30A41B9E96D10095598F /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		EACCDA491BADC38E0023DF82 /* IntensityColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntensityColorConstants.swift; sourceTree = "<group>"; };
+		EACCDA4B1BADC8AE0023DF82 /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		EAD8EC651B9A965E00850BE7 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		EAD8EC671B9B526900850BE7 /* ConfigurationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationConstants.swift; sourceTree = "<group>"; };
 		EAD8EC691B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurbulenceLocationSummaryDTO.swift; sourceTree = "<group>"; };
@@ -140,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				EA667BA71B93DCEA001430B6 /* Constants */,
-				EA667BA41B93DB2B001430B6 /* Messages */,
 				EA667BA11B93DA2D001430B6 /* DTOs */,
 				EA667B941B922563001430B6 /* Utilities */,
 				EA667B911B92251F001430B6 /* Models */,
@@ -184,6 +189,7 @@
 			children = (
 				EA667B871B8FAB92001430B6 /* DataCollectionManager.swift */,
 				EACC309D1B9E7A940095598F /* DeviceConfigurationManager.swift */,
+				EACCDA4B1BADC8AE0023DF82 /* SyncManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -202,6 +208,7 @@
 				EAD8EC6F1B9BB9F700850BE7 /* TurbulenceLocationSummaryDataCell.xib */,
 				EACC30951B9DFCD70095598F /* QuickSettingsViewController.swift */,
 				EACC30991B9E76E20095598F /* RegistrationViewController.swift */,
+				EACC30A41B9E96D10095598F /* LaunchScreen.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -246,13 +253,6 @@
 			name = DTOs;
 			sourceTree = "<group>";
 		};
-		EA667BA41B93DB2B001430B6 /* Messages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Messages;
-			sourceTree = "<group>";
-		};
 		EA667BA71B93DCEA001430B6 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +262,7 @@
 				EAD8EC671B9B526900850BE7 /* ConfigurationConstants.swift */,
 				EA3487681B9BC7B8006E1681 /* IntensityRatingConstants.swift */,
 				EACC30971B9E24FD0095598F /* SettingsConstants.swift */,
+				EACCDA491BADC38E0023DF82 /* IntensityColorConstants.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -362,6 +363,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EACC30A51B9E96D10095598F /* LaunchScreen.xib in Resources */,
 				EAD8EC701B9BB9F700850BE7 /* TurbulenceLocationSummaryDataCell.xib in Resources */,
 				EA4D36591B8E65450060091C /* Main.storyboard in Resources */,
 				EA4D365B1B8E65450060091C /* Images.xcassets in Resources */,
@@ -391,6 +393,7 @@
 				EA667B9A1B9240BA001430B6 /* IJReachability.swift in Sources */,
 				EA667B841B8F4251001430B6 /* FindSmoothAirViewController.swift in Sources */,
 				EA667B901B92248F001430B6 /* TurbulenceStatisticRepository.swift in Sources */,
+				EACCDA4A1BADC38E0023DF82 /* IntensityColorConstants.swift in Sources */,
 				EA667BA01B93D9FA001430B6 /* Serializable.swift in Sources */,
 				EAD8EC661B9A965E00850BE7 /* StringExtension.swift in Sources */,
 				EA667B881B8FAB92001430B6 /* DataCollectionManager.swift in Sources */,
@@ -408,6 +411,7 @@
 				EA748B3D1B95406500503A73 /* SecurityConstants.swift in Sources */,
 				EACC30961B9DFCD70095598F /* QuickSettingsViewController.swift in Sources */,
 				EA667B961B922577001430B6 /* DateUtility.swift in Sources */,
+				EACCDA4C1BADC8AE0023DF82 /* SyncManager.swift in Sources */,
 				EAD8EC6A1B9BAEC800850BE7 /* TurbulenceLocationSummaryDTO.swift in Sources */,
 				EAD8EC6C1B9BB98400850BE7 /* TurbulenceLocationSummaryDataCell.swift in Sources */,
 				EABCDE351B8E7C6C002572F4 /* PageViewController.swift in Sources */,
@@ -533,6 +537,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Fly Smuthe/Info.plist";
@@ -548,6 +553,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Fly Smuthe/Info.plist";

@@ -13,15 +13,15 @@ import CoreMotion
 
 class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManagerDelegate, UITableViewDataSource, UITableViewDelegate {
     
+    let _apiWebProxy = APIWebProxy();
+    
+    let InaccuracyThreshold = 50;
+    
     @IBOutlet weak var settingsIcon: UIImageView!
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var timeLabel: UILabel!
-    
-    let _apiWebProxy = APIWebProxy();
-    
-    let InaccuracyThreshold = 50;
     
     private var refreshControl: UIRefreshControl;
     
@@ -29,21 +29,23 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
     
     private var _lastLocation: CLLocation!;
     
+    private var _currentLocation: CLLocation!;
+    
     private var _turbulenceLocationSummaries = [TurbulenceLocationSummaryDTO]();
     
     private let TurbulenceLocationSummaryDataCellCellIdentifier = "TurbulenceLocationSummaryDataCellCellIdentifier";
     
     private var isLoadingData = false;
     
+    private var includeInaccurateResults: Bool = true;
+    
+    private var radius: Int = 3;
+    
+    private var hoursUntilStale: Int = 3;
+    
+    private var intervalMin: Int = 5;
+    
     var delegate: QuickSettingsViewControllerDelegate!;
-    
-    var includeInaccurateResults: Bool = true;
-    
-    var radius: Int = 3;
-    
-    var hoursUntilStale: Int = 3;
-    
-    var intervalMin: Int = 5;
     
     required init(coder aDecoder: NSCoder)
     {
@@ -105,28 +107,31 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
         
         let obj = _turbulenceLocationSummaries[indexPath.row];
         
+        // Set text
         cell.altitudeLabel.text = String(obj.Altitude) + "ft";
         cell.descriptionLabel.text = obj.Description;
         cell.frequencyLabel.text = String(format:"%.2f", obj.BumpsPerMinute) + "bpm";
         
+        // Bold current altitude
         if(Int(round(Double(_lastLocation.altitude) / 100.0) * 100) == obj.Altitude){
             cell.altitudeLabel.font = UIFont.boldSystemFontOfSize(cell.altitudeLabel.font.pointSize);
             cell.descriptionLabel.font = UIFont.boldSystemFontOfSize(cell.altitudeLabel.font.pointSize);
             cell.frequencyLabel.font = UIFont.boldSystemFontOfSize(cell.altitudeLabel.font.pointSize);
         }
         
+        // Set color coding by intensity
         if(obj.Accuracy < self.InaccuracyThreshold){
-            cell.backgroundColor = UIColor(white: 0.667, alpha: 0.3);
+            cell.backgroundColor = IntensityColorConstants.Inaccurate;
         } else if(obj.IntensityRating == IntensityRatingConstants.Smooth){
-            cell.backgroundColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.3);
+            cell.backgroundColor = IntensityColorConstants.Smooth;
         } else if(obj.IntensityRating == IntensityRatingConstants.Light){
-            cell.backgroundColor = UIColor(red: 0.5, green: 1.0, blue: 0.0, alpha: 0.3);
+            cell.backgroundColor = IntensityColorConstants.Light;
         } else if(obj.IntensityRating == IntensityRatingConstants.Moderate){
-            cell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 0.3);
+            cell.backgroundColor = IntensityColorConstants.Moderate;
         } else if(obj.IntensityRating == IntensityRatingConstants.Severe){
-            cell.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.3);
+            cell.backgroundColor = IntensityColorConstants.Severe;
         } else if(obj.IntensityRating == IntensityRatingConstants.Extreme){
-            cell.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5);
+            cell.backgroundColor = IntensityColorConstants.Extreme;
         }
     
         return cell;
@@ -150,14 +155,6 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
                 timeLabel.text = "Updated " + String(format:"%.2f", location.distanceFromLocation(_lastLocation) * ConfigurationConstants.NauticalMilesPerMeter) + "nm and " + timeSinceLastUpdate.timerString + " ago";
             }
         }
-        
-        if let thisAccelerometerData = accelerometerData {
-            /*
-            xLabel.text = String(format:"%.2f", thisAccelerometerData.acceleration.x);
-            yLabel.text = String(format:"%.2f", thisAccelerometerData.acceleration.y);
-            zLabel.text = String(format:"%.2f", thisAccelerometerData.acceleration.z);
-            */
-        }
     }
     
     private func getLatestSettings(){
@@ -169,6 +166,15 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
         }
     }
     
+    private func needLocationUpdate(location: CLLocation) -> Bool {
+        let minutesSinceLastUpdate = NSDate().timeIntervalSinceDate(_lastDownloadedDateTime).minute;
+        
+        let nauticalMilesSinceLastUpdate = (location.distanceFromLocation(_lastLocation) * ConfigurationConstants.NauticalMilesPerMeter);
+        
+        // True when we are past the update interval, past the update radius or we don't have an update yet
+        return (minutesSinceLastUpdate >= Double(self.intervalMin) || _lastLocation == nil || nauticalMilesSinceLastUpdate >= Double(self.radius));
+    }
+    
     private func getTurbulenceData(location: CLLocation, forceLoad: Bool){
         
         getLatestSettings();
@@ -177,12 +183,17 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
             
             isLoadingData = true;
             
-            if((NSDate().timeIntervalSinceDate(_lastDownloadedDateTime).minute >= Double(self.intervalMin) || _lastLocation == nil || (location.distanceFromLocation(_lastLocation) * ConfigurationConstants.NauticalMilesPerMeter) >= Double(self.radius)) || forceLoad){
+            if(self.needLocationUpdate(location) || forceLoad){
                 
                 let latString = String(format:"%f", location.coordinate.latitude);
                 let lonString = String(format:"%f", location.coordinate.longitude);
                 
-                var urlWithParams = APIURLConstants.GetTurbulenceStatistic.sub("[latitude]", with: latString).sub("[longitude]", with: lonString).sub("[radius]", with: String(self.radius)).sub("[hoursUntilStale]", with: String(self.hoursUntilStale));
+                // Setup URL with rest get params
+                var urlWithParams = APIURLConstants.GetTurbulenceStatistic
+                    .sub("[latitude]", with: latString)
+                    .sub("[longitude]", with: lonString)
+                    .sub("[radius]", with: String(self.radius))
+                    .sub("[hoursUntilStale]", with: String(self.hoursUntilStale));
                 
                 _apiWebProxy.get(DeviceConfigurationManager.sharedInstance.getAPICredential(), url: urlWithParams, getCompleted: { (succeeded, msg, json) -> () in
                     if(succeeded) {
