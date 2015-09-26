@@ -66,7 +66,7 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if (status == CLAuthorizationStatus.AuthorizedAlways || status == CLAuthorizationStatus.AuthorizedWhenInUse){
             locationManager.startUpdatingLocation();
         } else {
@@ -74,8 +74,7 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        let theseLocations = locations;
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         var xAccel: Double!;
         var yAccel: Double!;
@@ -89,7 +88,7 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
         var hasLocationData = false;
         var hasAccelData = false;
         
-        if let location = (locations.last as? CLLocation) {
+        if let location = locations.last {
             altitude = Int(location.altitude);
             latitude = location.coordinate.latitude;
             longitude = location.coordinate.longitude;
@@ -110,7 +109,7 @@ class DataCollectionManager : NSObject, CLLocationManagerDelegate {
             strongDelegate.receivedUpdate(weakLocation, accelerometerData: weakAccelData);
         }
         
-        var newTurbulenceDataState = TurbulenceStatisticModel(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude);
+        let newTurbulenceDataState = TurbulenceStatisticModel(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude);
         if((latestTurbulenceDataState == nil && hasLocationData && hasAccelData) || (latestTurbulenceDataState != nil && latestTurbulenceDataState.hasNotableChange(newTurbulenceDataState))){
             latestTurbulenceDataState = newTurbulenceDataState;
             

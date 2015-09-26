@@ -43,7 +43,7 @@ class TurbulenceStatisticRepository {
     }
     
     func save(turbulenceStatistic: TurbulenceStatisticModel) {
-        let entityTurbulenceStatistic = NSEntityDescription.insertNewObjectForEntityForName(TurbulenceStatisticProperties.EntityName, inManagedObjectContext: self.context) as! NSManagedObject;
+        let entityTurbulenceStatistic = NSEntityDescription.insertNewObjectForEntityForName(TurbulenceStatisticProperties.EntityName, inManagedObjectContext: self.context) ;
         entityTurbulenceStatistic.setValue(turbulenceStatistic.XAccel, forKey: TurbulenceStatisticProperties.XAccelKey);
         entityTurbulenceStatistic.setValue(turbulenceStatistic.YAccel, forKey: TurbulenceStatisticProperties.YAccelKey);
         entityTurbulenceStatistic.setValue(turbulenceStatistic.ZAccel, forKey: TurbulenceStatisticProperties.ZAccelKey);
@@ -59,7 +59,11 @@ class TurbulenceStatisticRepository {
         let request = NSFetchRequest(entityName: TurbulenceStatisticProperties.EntityName);
         var error: NSError? = nil;
         
-        return self.context.executeFetchRequest(request, error: &error);
+        do {
+            return try self.context.executeFetchRequest(request)
+        } catch _ {
+            return nil
+        };
     }
     
     func delete(obj: NSManagedObject){

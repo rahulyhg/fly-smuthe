@@ -22,7 +22,7 @@ class DeviceConfigurationManager {
     }
     
     func saveAccessKey(accessKey: String){
-        if(count(accessKey) == 0){
+        if(accessKey.characters.count == 0){
             UYLPasswordManager.sharedInstance().deleteKeyForIdentifier(SecurityConstants.AccessKeyApplicationTag);
             return;
         }
@@ -32,7 +32,7 @@ class DeviceConfigurationManager {
     
     func hasAccessKey() -> Bool {
         let accessKey = UYLPasswordManager.sharedInstance().keyForIdentifier(SecurityConstants.AccessKeyApplicationTag);
-        return accessKey != nil && count(accessKey) > 0;
+        return accessKey != nil && accessKey.characters.count > 0;
     }
     
     func getAccessKey() -> String {
@@ -44,7 +44,7 @@ class DeviceConfigurationManager {
     }
     
     func saveAccessId(accessId: String){
-        if(count(accessId) == 0){
+        if(accessId.characters.count == 0){
             UYLPasswordManager.sharedInstance().deleteKeyForIdentifier(SecurityConstants.AccessIdApplicationTag);
             return;
         }
@@ -53,7 +53,7 @@ class DeviceConfigurationManager {
     
     func hasAccessId() -> Bool {
         let accessId = UYLPasswordManager.sharedInstance().keyForIdentifier(SecurityConstants.AccessIdApplicationTag);
-        return accessId != nil && count(accessId) > 0;
+        return accessId != nil && accessId.characters.count > 0;
     }
     
     func getAccessId() -> String {

@@ -40,10 +40,10 @@ class PageViewController : UIViewController, UIPageViewControllerDataSource, Qui
         pageControl.currentPageIndicatorTintColor = UIColor.blackColor();
         pageControl.backgroundColor = UIColor.whiteColor();
         
-        pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("PagedViewControllerContainer")! as! UIPageViewController;
+        pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("PagedViewControllerContainer") as! UIPageViewController;
         pageViewController.dataSource = self;
         let firstPage = self.viewControllerAtIndex(0);
-        let pageArr = [firstPage];
+        let pageArr = [firstPage!];
         pageViewController.setViewControllers(pageArr, direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil);
         pageViewController.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
         self.addChildViewController(pageViewController);
@@ -89,7 +89,7 @@ class PageViewController : UIViewController, UIPageViewControllerDataSource, Qui
         constant = hide ? (constant - height) : (constant + height);
         view.layoutIfNeeded();
         
-        UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.95, initialSpringVelocity: 1, options: .AllowUserInteraction | .BeginFromCurrentState, animations: {
+        UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.95, initialSpringVelocity: 1, options: [.AllowUserInteraction, .BeginFromCurrentState], animations: {
                 self.quickSettingsContainerViewBottomConstraint.constant = constant;
                 self.view.layoutIfNeeded();
             }, completion: nil);

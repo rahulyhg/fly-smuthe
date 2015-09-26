@@ -19,7 +19,7 @@ class ThreadUtility {
     }
     
     class func delayCancelable(delay: Double, closure:()->()) -> dispatch_cancelable_block_t? {
-        return dispatch_block_t(delay, closure);
+        return dispatch_block_t(delay, block: closure);
     }
     
     class func cancel(block: dispatch_cancelable_block_t?){

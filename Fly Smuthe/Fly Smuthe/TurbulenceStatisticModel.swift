@@ -47,9 +47,9 @@ class TurbulenceStatisticModel {
             return true;
         }
         
-        var thisLocation = CLLocation(latitude: Latitude, longitude: Longitude);
-        var newLocation = CLLocation(latitude: turbulenceDataState.Latitude, longitude: turbulenceDataState.Longitude);
-        var distanceInMeters = newLocation.distanceFromLocation(thisLocation);
+        let thisLocation = CLLocation(latitude: Latitude, longitude: Longitude);
+        let newLocation = CLLocation(latitude: turbulenceDataState.Latitude, longitude: turbulenceDataState.Longitude);
+        let distanceInMeters = newLocation.distanceFromLocation(thisLocation);
         
         if((distanceInMeters * ConfigurationConstants.NauticalMilesPerMeter) >= 0.10){
             return true;

@@ -47,7 +47,7 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
     
     var delegate: QuickSettingsViewControllerDelegate!;
     
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         refreshControl = UIRefreshControl();
         
@@ -68,12 +68,12 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
         tableView.estimatedRowHeight = 200.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        var settingsTap = UITapGestureRecognizer(target: self, action: Selector("settingsTapped"))
+        let settingsTap = UITapGestureRecognizer(target: self, action: Selector("settingsTapped"))
         settingsIcon.addGestureRecognizer(settingsTap)
         settingsIcon.userInteractionEnabled = true
         
         
-        var viewTap = UITapGestureRecognizer(target: self, action: Selector("settingsDismissed"))
+        let viewTap = UITapGestureRecognizer(target: self, action: Selector("settingsDismissed"))
         view.addGestureRecognizer(viewTap)
         view.userInteractionEnabled = true;
     }
@@ -103,7 +103,7 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(TurbulenceLocationSummaryDataCellCellIdentifier) as! TurbulenceLocationSummaryDataCell;
+        let cell = tableView.dequeueReusableCellWithIdentifier(TurbulenceLocationSummaryDataCellCellIdentifier) as! TurbulenceLocationSummaryDataCell;
         
         let obj = _turbulenceLocationSummaries[indexPath.row];
         
@@ -189,7 +189,7 @@ class FindSmoothAirViewController : PagedViewControllerBase, DataCollectionManag
                 let lonString = String(format:"%f", location.coordinate.longitude);
                 
                 // Setup URL with rest get params
-                var urlWithParams = APIURLConstants.GetTurbulenceStatistic
+                let urlWithParams = APIURLConstants.GetTurbulenceStatistic
                     .sub("[latitude]", with: latString)
                     .sub("[longitude]", with: lonString)
                     .sub("[radius]", with: String(self.radius))

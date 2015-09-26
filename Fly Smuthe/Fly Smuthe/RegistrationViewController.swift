@@ -25,7 +25,7 @@ class RegistrationViewController : UIViewController {
         activityIndicator.startAnimating();
         continueButton.hidden = true;
         
-        if(!emailTextField.text.isValidEmail()){
+        if(!emailTextField.text!.isValidEmail()){
             self.activityIndicator.stopAnimating();
             self.continueButton.hidden = false;
             
@@ -39,14 +39,13 @@ class RegistrationViewController : UIViewController {
             return;
         }
         
-        let userDTO = UserDTO(email: emailTextField.text);
+        let userDTO = UserDTO(email: emailTextField.text!);
         
         // Post to web api
         self.apiWebProxy.post(userDTO, credential: "", url: APIURLConstants.Register, expectsEncryptedResponse: false, postCompleted: { (succeeded: Bool, msg: String, json: NSDictionary?) -> () in
             
             // If unsuccessful, the data will remain local and keep trying
             // to sync until it is stale
-            var parsed = false;
             if(succeeded) {
                 if let parseJSON = json {
                     if let responseCode = parseJSON["ResponseCode"]?.integerValue {

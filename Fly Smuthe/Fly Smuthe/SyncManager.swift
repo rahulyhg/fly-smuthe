@@ -68,14 +68,13 @@ class SyncManager {
                                         let longitude = obj.valueForKey(TurbulenceStatisticProperties.LongitudeKey)!.doubleValue!;
                                         
                                         // Assemble DTO for syncing
-                                        var turbulenceStatisticDTO = TurbulenceStatisticDTO(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude, created: date!, groupId: self.groupId);
+                                        let turbulenceStatisticDTO = TurbulenceStatisticDTO(xAccel: xAccel, yAccel: yAccel, zAccel: zAccel, altitude: altitude, latitude: latitude, longitude: longitude, created: date!, groupId: self.groupId);
                                         
                                         // Post to web api
                                         self.apiWebProxy.post(turbulenceStatisticDTO, credential: DeviceConfigurationManager.sharedInstance.getAPICredential(), url: APIURLConstants.PostTurbulenceStatistic, expectsEncryptedResponse: false, postCompleted: { (succeeded: Bool, msg: String, json: NSDictionary?) -> () in
                                             
                                             // If unsuccessful, the data will remain local and keep trying
                                             // to sync until it is stale
-                                            var parsed = false;
                                             if(succeeded) {
                                                 if let parseJSON = json {
                                                     if let responseCode = parseJSON["ResponseCode"]?.integerValue {
